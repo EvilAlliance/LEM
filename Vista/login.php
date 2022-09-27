@@ -21,7 +21,7 @@
 			   </div>
             <div class="grupoform">
 
-              <button class="btingresar" type="button" id="Login">ingreasdasdsar</button>
+              <button class="btingresar" type="button" id="Login">ingresar</button>
 			    </div>
           </form>  
          </div>
