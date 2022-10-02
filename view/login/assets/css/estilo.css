@@ -147,3 +147,35 @@ html, body{
 }
 
 
+.Input-group{
+    position: relative;
+}
+
+.input{
+    padding: 10px;
+    border: none;
+    border-radius : 4px;
+    font: inherit;
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+    outline: 6px solid #0014A7;
+ }
+
+.input-Label{
+    position: absolute;
+    top: 0;
+    Left: 0;
+    transform: translate(28px, 10px);
+    transition: transform .25s;
+}
+
+.input:focus+.input-label,input:valid+.input-label{
+    transform: translate(18px, -14px) scale(.95);
+    color: black; 
+    padding-inline: 5px;
+    background-color : #FFFDF4;
+}
+
+.input:is(:focus,:valid){
+    outline-color:#0014A7;
+}
