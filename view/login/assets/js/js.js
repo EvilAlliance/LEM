@@ -6,7 +6,9 @@ $(window).ready(
 
 $(document).ready(
     function(){
-            setInterval(reloj, 1000);
+        reloj();
+        setInterval(reloj, 60000);
+        bandera();
     }
 );
 
@@ -23,5 +25,5 @@ window.addEventListener(
 const reloj = () => 
 {
     const text = document.getElementById("reloj");
-    text.innerHTML = moment().format('LT');
+    text.innerHTML = moment().format('DD/MM/YY hh:mm'); 
 };
