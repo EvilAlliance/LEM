@@ -27,13 +27,25 @@
       </div>
     </div>
   </div>
+
+  <div>
+    
+  </div>
+
   <div class="d-none d-md-block cienwid footer">
     <div class="row-cols-12 align-items-end ceropad ceromar">
-      <div class="col-4" id="idioma">
-        <div class="wrapper">
-          <div class="select-language">
-            <div class="select-language-container">
-              <img src="view\login\assets\img\URU.jpg" />
+      <div class="col-4 cuarenta" >
+      <div class="wrapper" id="seleccionado">
+          <div class="select-language" >
+            <div class="select-language-container" >
+              <img class="uru" src="view\login\assets\img\URU.jpg" id="primario"/>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper" id="menu">
+          <div class="select-language" >
+            <div class="select-language-container" >
+              <img class="eng" src="view\login\assets\img\ENG.png" id="secundario"/>
             </div>
           </div>
         </div>
