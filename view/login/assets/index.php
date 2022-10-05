@@ -11,42 +11,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
-<body>
-  <div class="d-none d-md-block cienwid barra">
-    <div class="row ceropad ceromar">
-      <div class="col" id="barra">
-        <img class="logo" src="view\login\assets\img\LEM.svg">
+<body class="d-flex flex-column min-vh-100">
+  <div class="d-none d-md-block w-100 row ceropad ceromar barra">
+    <div class="col" id="barra">
+      <img class="logo" src="view\login\assets\img\LEM.svg">
+    </div>
+    <div class="col">
+      <div id="rol">
       </div>
-      <div class="col">
-        <div id="rol">
+    </div>
+    <div class="col">
+      <div id="perfil">
+      </div>
+    </div>
+  </div>
+  <div class="row relative w-100 dentro ceromar">
+    <div class="login col centrar ceropad">
+      <div class="caja relative m-auto centrar1">
+        <h3 id="login" class="d-block m-auto">
+          Inicio de Sesion
+          </3h>
+          <span class="bar"></span>
+      </div>
+      <div class="ingresar w-100 relative">
+        <div class="group mx-auto">
+          <input type="text" required>
+          <span class="bar"></span>
+          <label>Cedula</label>
         </div>
-      </div>
-      <div class="col">
-        <div id="perfil">
+        <div class="group mx-auto">
+          <input type="text " required>
+          <span class="bar"></span>
+          <label>Contraseña</label>
         </div>
       </div>
     </div>
   </div>
-
-  <div>
-    
-  </div>
-
-  <div class="d-none d-md-block cienwid footer">
-    <div class="row-cols-12 align-items-end ceropad ceromar">
-      <div class="col-4 cuarenta" >
+  <div class="d-none d-md-block w-100 footer row ceropad mt-auto ceromar">
+    <div class="col-4 cuarenta">
       <div class="wrapper" id="seleccionado">
-          <div class="select-language" >
-            <div class="select-language-container" >
-              <img class="uru" src="view\login\assets\img\URU.jpg" id="primario"/>
-            </div>
+        <div class="select-language">
+          <div class="select-language-container">
+            <img class="uru" src="view\login\assets\img\URU.jpg" id="primario" />
           </div>
         </div>
-        <div class="wrapper" id="menu">
-          <div class="select-language" >
-            <div class="select-language-container" >
-              <img class="eng" src="view\login\assets\img\ENG.png" id="secundario"/>
-            </div>
+      </div>
+      <div class="wrapper" id="menu">
+        <div class="select-language">
+          <div class="select-language-container">
+            <img class="eng" src="view\login\assets\img\ENG.png" id="secundario" />
           </div>
         </div>
       </div>

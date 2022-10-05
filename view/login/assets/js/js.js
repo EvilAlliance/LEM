@@ -9,17 +9,19 @@ $(document).ready(function () {
     $("#seleccionado").on('click', function () {
         console.log('click');
         if ($("#menu").css('display') != 'none') {
-            console.log('perra ');
-            $("#menu").animate({ left: '0px' }, 'slow');
+            $("#menu").toggleClass("slidedown").animate({ left: '1%' }, 'slow');
             setTimeout(() => {
-                $("#menu").hide();
+                $("#menu").hide() .toggleClass("slidedown");
             },600);
         } else {
-            $("#menu").show().animate({ left: '50px' }, 1000);
+            $("#menu").show().toggleClass("slidedown").animate({ left: '60px' }, 'slow');
+            setTimeout(() => {
+                $("#menu").toggleClass("slidedown");
+            },600);
         }
     });
     $("#menu").on('click', function () {
-        $("#menu").toggleClass("slide").animate({ left: '0px' }, 'slow');
+        $("#menu").toggleClass("slideup").animate({ left: '1%' }, 'slow');
         setTimeout(() => {
             const primario = $("#primario").attr('src');
             const secundario = $("#secundario").attr('src');
@@ -29,7 +31,7 @@ $(document).ready(function () {
             $("#secundario").attr("src", primario);
             $("#primario").attr("class", classsecundario);
             $("#secundario").attr("class", classprimario);
-            $("#menu").hide().toggleClass("slide");
+            $("#menu").hide().toggleClass("slideup");
         }, 600);
     });
 });
