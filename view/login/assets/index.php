@@ -25,30 +25,77 @@
       </div>
     </div>
   </div>
-  <div class="row relative w-100 dentro ceromar">
+  <div class="row relative w-100 dentro ceromar overflowy">
     <div class="login col centrar ceropad">
+      <div class="d-block d-md-none relative w-100 chico">
+        <div class="wrapper" id="seleccionado1">
+          <div class="select-language">
+            <div class="select-language-container">
+              <img class="uru" src="view\login\assets\img\URU.jpg" id="primario1" />
+            </div>
+          </div>
+        </div>
+        <div class="wrapper" id="menu1">
+          <div class="select-language">
+            <div class="select-language-container">
+              <img class="eng" src="view\login\assets\img\ENG.png" id="secundario1" />
+            </div>
+          </div>
+        </div>
+        <div class="wrapper" id="ayuda1">
+          <div class="select-language">
+            <div class="select-language-container">
+              <p>
+                ?
+              </p>
+            </div>
+          </div>
+        </div>
+        <img class="logo centrar" src="view\login\assets\img\LEM.svg">
+      </div>
       <div class="caja relative m-auto centrar1">
-        <h3 id="login" class="d-block m-auto">
+        <h3 id="login" class="d-block mauto">
           Inicio de Sesion
           </3h>
           <span class="bar"></span>
       </div>
       <div class="ingresar w-100 relative">
         <div class="group mx-auto">
-          <input type="text" required>
+          <input type="number" class="input" required>
+          <span class="highlight"></span>
           <span class="bar"></span>
           <label>Cedula</label>
         </div>
         <div class="group mx-auto">
-          <input type="text " required>
+          <input type="checkbox" id="show" name="show" class="group--visibleToggle" checked>
+          <div class="group--visibleToggle-eye open">
+            <img src="view\login\assets\img\eye-open.png" />
+          </div>
+          <div class="group--visibleToggle-eye close">
+            <img src="view\login\assets\img\eye-close.png" />
+          </div>
+          <input id="pass" type="password" class="input" required maxlength="23">
+          <span class="highlight"></span>
           <span class="bar"></span>
           <label>Contraseña</label>
         </div>
+        <div class="relative w-100 olvido">
+          <p id="olvidar">
+            ¿Has olvidado tu contraseña?
+          </p>
+        </div>
+        <div class="centrar1 martop">
+          <div class="button -blue relative"  id="boton">
+            <p>
+              Iniciar Sesion
+            </p>
+          </div>
+        </div>  
       </div>
     </div>
   </div>
-  <div class="d-none d-md-block w-100 footer row ceropad mt-auto ceromar">
-    <div class="col-4 cuarenta">
+  <div class="d-none d-md-block w-100 footer row ceropad mt-auto ceromar relative">
+    <div class="col cuarenta">
       <div class="wrapper" id="seleccionado">
         <div class="select-language">
           <div class="select-language-container">
@@ -60,6 +107,17 @@
         <div class="select-language">
           <div class="select-language-container">
             <img class="eng" src="view\login\assets\img\ENG.png" id="secundario" />
+          </div>
+        </div>
+      </div>
+      <div class="col cuarenta">
+        <div class="wrapper" id="ayuda">
+          <div class="select-language">
+            <div class="select-language-container">
+              <p>
+                ?
+              </p>
+            </div>
           </div>
         </div>
       </div>
