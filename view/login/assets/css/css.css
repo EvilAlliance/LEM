@@ -263,6 +263,16 @@ body {
     background-color: #f1f1f1;
 }
 
+.input.error {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid red;
+    background-color: #f1f1f1;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;

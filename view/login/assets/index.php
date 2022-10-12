@@ -61,7 +61,7 @@
       </div>
       <div class="ingresar w-100 relative">
         <div class="group mx-auto">
-          <input type="number" class="input" required>
+          <input type="number" id="CI" class="input" required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Cedula</label>

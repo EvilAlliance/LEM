@@ -13,14 +13,14 @@ $(document).ready(function () {
             $("#menu").toggleClass("slidedown").animate({ left: '1%' }, 'slow');
             $("#ayuda").animate({ left: '60px' }, 'slow');
             setTimeout(() => {
-                $("#menu").hide() .toggleClass("slidedown");
-            },600);
+                $("#menu").hide().toggleClass("slidedown");
+            }, 600);
         } else {
             $("#menu").show().toggleClass("slidedown").animate({ left: '60px' }, 'slow');
             $("#ayuda").animate({ left: '110px' }, 'slow');
             setTimeout(() => {
                 $("#menu").toggleClass("slidedown");
-            },600);
+            }, 600);
         }
     });
     $("#menu").on('click', function () {
@@ -43,13 +43,13 @@ $(document).ready(function () {
         if ($("#menu1").css('display') != 'none') {
             $("#menu1").toggleClass("slidedown").animate({ top: '1%' }, 'slow');
             setTimeout(() => {
-                $("#menu1").hide() .toggleClass("slidedown");
-            },600);
+                $("#menu1").hide().toggleClass("slidedown");
+            }, 600);
         } else {
             $("#menu1").show().toggleClass("slidedown").animate({ top: '50px' }, 'slow');
             setTimeout(() => {
                 $("#menu1").toggleClass("slidedown");
-            },600);
+            }, 600);
         }
     });
     $("#menu1").on('click', function () {
@@ -68,10 +68,10 @@ $(document).ready(function () {
     });
     $("#show").change(function () {
         console.log('show');
-        if ( $("#pass").attr('type') != 'text') {
-            $("#pass").attr('type', 'text')  
+        if ($("#pass").attr('type') != 'text') {
+            $("#pass").attr('type', 'text')
         } else {
-            $("#pass").attr('type', 'password')  
+            $("#pass").attr('type', 'password')
         }
     });
     $("#olvidar").on('click', function () {
@@ -84,7 +84,74 @@ $(document).ready(function () {
         console.log('ayuda');
     });
     $("#boton").on('click', function () {
-        console.log('boton');
+        if ($('#CI').val() !== "" && $('#pass').val() !== "") {
+            let CI = $('#CI').val();
+            let pass = $('#pass').val();
+            $("#pass").removeClass("error");
+            $("#CI").removeClass("error");
+            console.log(CI);
+            console.log(pass);
+            $.ajax({
+                url: 'view/login/Login.php',
+                type: 'POST',
+                data: {
+                    CI: CI,
+                    pass: pass,
+                    beforeSend: function () {
+                        console.log("llammando");
+                    }
+                },
+                success(respuesta) {
+                    if (respuesta === "Existe Cuenta") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Este usario existe',
+                            text: 'Redireccionando al sistema',
+                            confirmButtonText: 'Entendido',
+                            timer: 850,
+                            timerProgressBar: true,
+                        });
+                    } else if (respuesta === "Error Cuenta") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Este cuenta no existe',
+                            text: 'El usuario no fue encontrado en el sistema',
+                            confirmButtonText: 'Entendido'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error en el sistema',
+                            text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
+                },
+                failure(respuesta) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'No se Pudo conectar con el servidor',
+                        text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+            });
+        } else {
+            if ($('#CI').val() == "" && $('#pass').val() == "") {
+                console.log('ambos');
+                $("#CI").addClass("error");
+                $("#pass").addClass("error");
+            } else if ($('#pass').val() == "") {
+                console.log('pass');
+                $("#pass").addClass("error");
+                $("#CI").removeClass("error");
+            } else if ($('#CI').val() == "") {
+                console.log('CI')
+                $("#CI").addClass("error");
+                $("#pass").removeClass("error");
+            }
+        }
+
     });
 });
 
