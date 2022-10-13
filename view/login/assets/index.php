@@ -1,38 +1,136 @@
+<!doctype html>
+<html lang="en">
 
-<html>
-<head> 
-    <title> LEM </title>
-    <link rel="stylesheet" type="text/css" href="view\login\assets\css\librerias\Primer\Primer.min.css">
-    <link rel="stylesheet" type="text/css" href="view/login/assets/css/estilo.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="view\login\assets\img/LEM.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet">
+  <link href="view/login/assets/css/librerias/bootstrap.min.css" rel="stylesheet">
+  <link href="view\login\assets\css\css.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
-<body> 
-    
-      <div class="contenedor"> 
-           <div class="sup"> </div>
-         <div class="login"> 
-            <img id="LogoL" src="img/LEM.png">
-          <form method="post" class="">  
-          <div class="input-group">
-           <input type="text " id="name" required class="input">
-           <label for="name" class="input-Label">
-              Cedula
-          </label>
-          </div>
-			    <div class="grupoform">    
-              <input type="password" class="form_input" id="Contra" placeholder="Ingrese su Contraseña">         
-			   </div>
-            <div class="grupoform">
 
-              <button class="btingresar" type="button" id="Login">ingresar</button>
-			    </div>
-          </form>  
-         </div>
-         <div class="bot"> </div>
+<body class="d-flex flex-column min-vh-100">
+  <div class="d-none d-md-block w-100 row ceropad ceromar barra">
+    <div class="col" id="barra">
+      <img class="logo" src="view\login\assets\img\LEM.svg">
+    </div>
+    <div class="col">
+      <div id="rol">
       </div>
-      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script src="view/login/assets/js/jquery.min.js"></script>
-      <script type="text/javascript" src="view/login/assets/js/Codigo.js"></script>  
+    </div>
+    <div class="col">
+      <div id="perfil">
+      </div>
+    </div>
+  </div>
+  <div class="row relative w-100 dentro ceromar overflowy">
+    <div class="login col centrar ceropad">
+      <div class="d-block d-md-none relative w-100 chico">
+        <div class="wrapper" id="seleccionado1">
+          <div class="select-language">
+            <div class="select-language-container">
+              <img class="uru" src="view\login\assets\img\URU.jpg" id="primario1" />
+            </div>
+          </div>
+        </div>
+        <div class="wrapper" id="menu1">
+          <div class="select-language">
+            <div class="select-language-container">
+              <img class="eng" src="view\login\assets\img\ENG.png" id="secundario1" />
+            </div>
+          </div>
+        </div>
+        <div class="wrapper" id="ayuda1">
+          <div class="select-language">
+            <div class="select-language-container">
+              <p>
+                ?
+              </p>
+            </div>
+          </div>
+        </div>
+        <img class="logo centrar" src="view\login\assets\img\LEM.svg">
+      </div>
+      <div class="caja relative m-auto centrar1">
+        <h3 id="login" class="d-block mauto">
+          Inicio de Sesion
+          </3h>
+          <span class="bar"></span>
+      </div>
+      <div class="ingresar w-100 relative">
+        <div class="group mx-auto">
+          <input type="number" id="CI" class="input" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Cedula</label>
+        </div>
+        <div class="group mx-auto">
+          <input type="checkbox" id="show" name="show" class="group--visibleToggle" checked>
+          <div class="group--visibleToggle-eye open">
+            <img src="view\login\assets\img\eye-open.png" />
+          </div>
+          <div class="group--visibleToggle-eye close">
+            <img src="view\login\assets\img\eye-close.png" />
+          </div>
+          <input id="pass" type="password" class="input" required maxlength="23">
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Contraseña</label>
+        </div>
+        <div class="relative w-100 olvido">
+          <p id="olvidar">
+            ¿Has olvidado tu contraseña?
+          </p>
+        </div>
+        <div class="centrar1 martop">
+          <div class="button -blue relative"  id="boton">
+            <p>
+              Iniciar Sesion
+            </p>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+  <div class="d-none d-md-block w-100 footer row ceropad mt-auto ceromar relative">
+    <div class="col cuarenta">
+      <div class="wrapper" id="seleccionado">
+        <div class="select-language">
+          <div class="select-language-container">
+            <img class="uru" src="view\login\assets\img\URU.jpg" id="primario" />
+          </div>
+        </div>
+      </div>
+      <div class="wrapper" id="menu">
+        <div class="select-language">
+          <div class="select-language-container">
+            <img class="eng" src="view\login\assets\img\ENG.png" id="secundario" />
+          </div>
+        </div>
+      </div>
+      <div class="col cuarenta">
+        <div class="wrapper" id="ayuda">
+          <div class="select-language">
+            <div class="select-language-container">
+              <p>
+                ?
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col" id="reloj">
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="view/login/assets/js/librerias/package/dist/sweetalert2.all.min.js"></script>
+  <script type="text/javascript" src="view\login\assets\js\librerias\luxon.js"></script>
+  <script type="text/javascript" src="view\login\assets\js\librerias\moment.js"></script>
+  <script type="text/javascript" src="view/login/assets/js/librerias/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="view/login/assets/js/js.js"></script>
 </body>
+
 </html>

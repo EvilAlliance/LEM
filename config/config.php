@@ -1,5 +1,6 @@
 <?php
-/* Valores de conexión a la base de datos */
-define("DB_HOST", "serversle.ddns.com");
-define("DB", "LEM");
+define('host', 'serversle.ddns.net');
+define('db', 'LEM');
+define('sesion', 'Sesion');
+define('sesionpass', 'Sesion3254');
 ?>

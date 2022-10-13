@@ -253,6 +253,12 @@ body {
     width: 70%;
 }
 
+.group.Swal {
+    position: relative;
+    margin-top: 20px;
+    width: 70%;
+}
+
 .input {
     font-size: 18px;
     padding: 10px 10px 10px 5px;
@@ -260,6 +266,16 @@ body {
     width: 100%;
     border: none;
     border-bottom: 1px solid #757575;
+    background-color: #f1f1f1;
+}
+
+.input.error {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid red;
     background-color: #f1f1f1;
 }
 
@@ -523,115 +539,4 @@ label {
 
 .martop {
     margin-top: 15%;
-}
-
-.contenedor{
-	background-color: #96C6FF;
-	position: relative;
-	width: 1000px;
-	height: 680px;
-	left: 396px;
-    top: 80px;
-    border: 2px solid #0014A7;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-	overflow: hidden;
-	
-}
-
-
-
-
-.libreta{
-	background-color: white;
-	position: relative;
-	width: 450px;
-	height: 270px;
-	top: 30px;
-	left: 15px;
-	border: 2px solid #0014A7;
-    border-radius: 10px;
-}
-ul{
-	list-style-type: none;
-	font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 275;
-    font-size: 30px;
-    line-height: 36px;
-
-    color: #000000;
-}
-
-button{
-	position: relative;
-	width: 279px;
-    height: 35px;
-    left: 80px;
-    top: 13px;
-
-    background: #000000;
-    border: 2px solid #0014A7;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
-	font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 275;
-    font-size: 24px;
-    line-height: 36px;
-    color: #FFFFFF;
-}
-.libreta2{
-	background-color: white;
-	position: relative;
-	width: 450px;
-	height: 270px;
-	top: 60px;
-	left: 15px;
-	border: 2px solid #0014A7;
-    border-radius: 10px;
-}
-
-.libreta3{
-	background-color: white;
-	position: relative;
-	width: 450px;
-	height: 270px;
-	top: -215px;
-	left: 520px;
-	border: 2px solid #0014A7;
-    border-radius: 10px;
-}
-
-.libreta4{
-	background-color: white;
-	position: relative;
-	width: 450px;
-	height: 270px;
-	top: -793px;
-	left: 520px;
-	border: 2px solid #0014A7;
-    border-radius: 10px;
-}
-
-.libreta5{
-	background-color: white;
-	position: absolute;
-	width: 450px;
-	height: 270px;
-	top: 640px;
-	left: 15px;
-	border: 2px solid #0014A7;
-    border-radius: 10px;
-}
-
-.libreta6{
-	background-color: white;
-	position: absolute;
-	width: 450px;
-	height: 270px;
-	top: 640px;
-	left: 520px;
-	border: 2px solid #0014A7;
-    border-radius: 10px;
 }
