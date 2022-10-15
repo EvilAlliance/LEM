@@ -1,7 +1,10 @@
-$(window).ready(function () {
+$(window).on('load', function () {
     document.title = "Inicio de Sesion";
     $("#menu").hide();
     $("#menu1").hide();
+    $("#SecRol").hide();
+    $("#boton1").hide();
+    $('#ListadeRol').hide();
     reloj();
     setInterval(reloj, 1000);
 });
@@ -75,7 +78,239 @@ $(document).ready(function () {
         }
     });
     $("#olvidar").on('click', function () {
-        console.log('olvidar');
+        Swal.fire({
+            title: 'Ingrese la Cedula',
+            background: '#f1f1f1',
+            backdrop: 'true',
+            allowOutsideClick: 'false',
+            allowEnterKey: 'false',
+            showDenyButton: 'true',
+            confirmButtonText: 'Confirmar',
+            denyButtonText: 'Cancelar',
+            confirmButtonColor: '#13af01',
+            denyButtonColor: '#b91d1d',
+            html:
+                '<div class="Swal group mx-auto">' +
+                '<input type="number" id="CIolvido" class="input" required>' +
+                '<span class="highlight"></span>' +
+                '<span class="bar"></span>' +
+                '<label>Cedula</label>' +
+                '</div>'
+        }).then((result) => {
+            if ($('#CIolvido').val() !== "") {
+                let CI = $('#CIolvido').val();
+                $.ajax({
+                    url: 'view/login/ExisteUsuario.php',
+                    type: 'POST',
+                    data: {
+                        CI: CI,
+                        beforeSend: function () {
+                            console.log("Check Usuario");
+                        }
+                    },
+                    success(respuesta) {
+                        $Cuenta = JSON.parse(respuesta);
+                        if ($Cuenta.Existe.Resultado === "Existe Usuario") {
+                            $.ajax({
+                                url: 'view/login/Seguridad.php',
+                                type: 'Get',
+                                beforeSend: function () {
+                                    console.log("Cantidad de Seguridad");
+                                },
+                                success(respuesta) {
+                                    $Cantidad = JSON.parse(respuesta);
+                                    if (Number($Cantidad.Cantidad.Resultado.Cantidad) === 2) {
+                                        $.ajax({
+                                            url: 'view/login/Olvidar.php',
+                                            type: 'Get',
+                                            beforeSend: function () {
+                                                console.log("Pregunta y Respuesta de Seguridad");
+                                            },
+                                            success(respuesta) {
+                                                $Pregunta = JSON.parse(respuesta);
+                                                Swal.fire({
+                                                    title: 'Ingrese la Repuesta de la Pregunta',
+                                                    text: $Pregunta.Seguridad.Resultado[0].Pregunta,
+                                                    background: '#f1f1f1',
+                                                    backdrop: 'true',
+                                                    allowOutsideClick: 'false',
+                                                    allowEnterKey: 'false',
+                                                    showDenyButton: 'true',
+                                                    confirmButtonText: 'Confirmar',
+                                                    denyButtonText: 'Cancelar',
+                                                    confirmButtonColor: '#13af01',
+                                                    denyButtonColor: '#b91d1d',
+                                                    html:
+                                                        $Pregunta.Seguridad.Resultado[0].Pregunta +
+                                                        '<div class="Swal group mx-auto" style="margin-top: px;">' +
+                                                        '<input type="text" id="Respuesta" class="input" required>' +
+                                                        '<span class="highlight"></span>' +
+                                                        '<span class="bar"></span>' +
+                                                        '<label>Respuesta</label>' +
+                                                        '</div>'
+
+                                                }).then((result) => {
+                                                    if ($('#Respuesta').val() !== "") {
+                                                        if ($('#Respuesta').val() === $Pregunta.Seguridad.Resultado[0].Respuesta) {
+                                                            Swal.fire({
+                                                                title: 'Ingrese la Repuesta de la Pregunta',
+                                                                text: $Pregunta.Seguridad.Resultado[1].Pregunta,
+                                                                background: '#f1f1f1',
+                                                                backdrop: 'true',
+                                                                allowOutsideClick: 'false',
+                                                                allowEnterKey: 'false',
+                                                                showDenyButton: 'true',
+                                                                confirmButtonText: 'Confirmar',
+                                                                denyButtonText: 'Cancelar',
+                                                                confirmButtonColor: '#13af01',
+                                                                denyButtonColor: '#b91d1d',
+                                                                html:
+                                                                    $Pregunta.Seguridad.Resultado[0].Pregunta +
+                                                                    '<div class="Swal group mx-auto" style="margin-top: px;">' +
+                                                                    '<input type="text" id="Respuesta1" class="input" required>' +
+                                                                    '<span class="highlight"></span>' +
+                                                                    '<span class="bar"></span>' +
+                                                                    '<label>Respuesta</label>' +
+                                                                    '</div>'
+
+                                                            }).then((result) => {
+                                                                if ($('#Respuesta1').val() !== "") {
+                                                                    if ($('#Respuesta1').val() === $Pregunta.Seguridad.Resultado[1].Respuesta) {
+                                                                        Inicio();
+                                                                    }
+                                                                } else {
+                                                                    console.log('Vacio');
+                                                                    Swal.fire({
+                                                                        icon: 'error',
+                                                                        title: 'El Campo se Encuantra Vacio',
+                                                                        background: '#f1f1f1',
+                                                                        backdrop: 'true',
+                                                                        allowOutsideClick: 'false',
+                                                                        allowEnterKey: 'false',
+                                                                        timer: '3000'
+                                                                    });
+                                                                    $.ajax({
+                                                                        url: 'view/login/ExisteUsuario.php',
+                                                                        type: 'GET',
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    } else {
+                                                        console.log('Vacio');
+                                                        Swal.fire({
+                                                            icon: 'error',
+                                                            title: 'El Campo se Encuantra Vacio',
+                                                            background: '#f1f1f1',
+                                                            backdrop: 'true',
+                                                            allowOutsideClick: 'false',
+                                                            allowEnterKey: 'false',
+                                                            timer: '3000'
+                                                        });
+                                                        $.ajax({
+                                                            url: 'view/login/ExisteUsuario.php',
+                                                            type: 'GET',
+                                                        });
+                                                    }
+                                                });
+                                            },
+                                            failure(respuesta) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'No se Pudo conectar con el servidor',
+                                                    text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                                                    confirmButtonText: 'Entendido',
+                                                    timer: '2000',
+                                                    background: '#f1f1f1',
+                                                    backdrop: 'true',
+                                                    allowOutsideClick: 'false',
+                                                    allowEnterKey: 'false',
+                                                });
+                                            }
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'No tenes las Preguntas de Seguridad Establecidas',
+                                            background: '#f1f1f1',
+                                            backdrop: 'true',
+                                            allowOutsideClick: 'false',
+                                            allowEnterKey: 'false',
+                                            timer: '3000'
+                                        });
+                                    }
+                                },
+                                failure(respuesta) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'No se Pudo conectar con el servidor',
+                                        text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                                        confirmButtonText: 'Entendido',
+                                        timer: '2000',
+                                        background: '#f1f1f1',
+                                        backdrop: 'true',
+                                        allowOutsideClick: 'false',
+                                        allowEnterKey: 'false'
+                                    });
+                                }
+                            });
+
+                        } else if ($Cuenta.Existe.Resultado === "Error Usuario") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'No se a Encontrado el Usuario Ingresado',
+                                confirmButtonText: 'Entendido',
+                                timer: '2000',
+                                background: '#f1f1f1',
+                                backdrop: 'true',
+                                allowOutsideClick: 'false',
+                                allowEnterKey: 'false'
+                            });
+                            $.ajax({
+                                url: 'view/login/ExisteUsuario.php',
+                                type: 'GET',
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error en el sistema',
+                                text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                                confirmButtonText: 'Entendido',
+                                timer: '2000',
+                                background: '#f1f1f1',
+                                backdrop: 'true',
+                                allowOutsideClick: 'false',
+                                allowEnterKey: 'false',
+                            });
+                        }
+                    },
+                    failure(respuesta) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'No se Pudo conectar con el servidor',
+                            text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                            confirmButtonText: 'Entendido',
+                            timer: '2000',
+                            background: '#f1f1f1',
+                            backdrop: 'true',
+                            allowOutsideClick: 'false',
+                            allowEnterKey: 'false'
+                        });
+                    }
+                });
+            } else {
+                console.log('Vacio');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'El Campo se Encuantra Vacio',
+                    background: '#f1f1f1',
+                    backdrop: 'true',
+                    allowOutsideClick: 'false',
+                    allowEnterKey: 'false',
+                    timer: '3000'
+                });
+            }
+        });
     });
     $("#ayuda").on('click', function () {
         console.log('ayuda');
@@ -100,105 +335,10 @@ $(document).ready(function () {
                     }
                 },
                 success(respuesta) {
-                    if (respuesta === "Existe Cuenta") {
-                        $.ajax({
-                            url: 'view/login/Seguridad.php',
-                            type: 'GET',
-                            beforeSend: function () {
-                                console.log("Seguridad");
-                            },
-                            success(respuesta) {
-                                $cantidad = respuesta;
-                                if ($cantidad <= '2') {
-                                    $cantidad = $cantidad + 1;
-                                    Swal.fire({
-                                        title: 'Ingrese Pregunta y Respuesta de Seguridad Nº ' + respuesta,
-                                        background: '#f1f1f1',
-                                        backdrop: 'true',
-                                        allowOutsideClick: 'false',
-                                        allowEnterKey: 'false',
-                                        showDenyButton: 'true',
-                                        confirmButtonText: 'Confirmar',
-                                        denyButtonText: 'Cancelar',
-                                        confirmButtonColor: '#13af01',
-                                        denyButtonColor: '#b91d1d',
-                                        showCloseButton: 'true',
-                                        html:
-                                            '<div class="Swal group mx-auto">' +
-                                            '<input type="text" id="Pregunta" class="input" required>' +
-                                            '<span class="highlight"></span>' +
-                                            '<span class="bar"></span>' +
-                                            '<label>Pregunta</label>' +
-                                            '</div>' +
-                                            '<div class="Swal group mx-auto">' +
-                                            '<input type="number" id="Respuesta" class="input" required>' +
-                                            '<span class="highlight"></span>' +
-                                            '<span class="bar"></span>' +
-                                            '<label>Respuesta</label>' +
-                                            '</div>'
-
-                                    }).then((result) => {
-                                        if (result.isConfirmed && $('#Pregunta').val() !== "" && $('#Respuesta').val() !== "") {
-                                            let Pregunta = $('#Pregunta').val();
-                                            let Respuesta = $('#Respuesta').val();
-                                            $.ajax({
-                                                url: 'view/login/InsertSeguridad.php',
-                                                type: 'POST',
-                                                data: {
-                                                    Pregunta: Pregunta,
-                                                    Respuesta: Respusta,
-                                                    beforeSend: function () {
-                                                        console.log("Insert Seguridad");
-                                                    }
-                                                },
-                                                success(respuesta) {
-
-                                                },
-                                                failure(respuesta) {
-                                                    Swal.fire({
-                                                        icon: 'error',
-                                                        title: 'No se Pudo conectar con el servidor',
-                                                        text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
-                                                        confirmButtonText: 'Entendido'
-                                                    });
-                                                }
-                                            });
-                                        } else if (result.isConfirmed) {
-                                            console.log('Vacio');
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Uno o ambos de los campos se Encuantra Vacio',
-                                                background: '#f1f1f1',
-                                                backdrop: 'true',
-                                                allowOutsideClick: 'false',
-                                                allowEnterKey: 'false',
-                                                timer: '3000'
-                                            });
-                                        } else if (result.isDenied) {
-                                            console.log('Cancel');
-                                            Swal.fire({
-                                                icon: 'warning',
-                                                title: 'Es necesario que ingreses la Pregunta de Seguridad y su Respuesta',
-                                                background: '#f1f1f1',
-                                                allowOutsideClick: 'false',
-                                                backdrop: 'true',
-                                                allowEnterKey: 'false',
-                                                timer: '3000'
-                                            });
-                                        }
-                                    });
-                                }
-                            },
-                            failure(respuesta) {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'No se Pudo conectar con el servidor',
-                                    text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
-                                    confirmButtonText: 'Entendido'
-                                });
-                            }
-                        });
-                    } else if (respuesta === "Error Cuenta") {
+                    $Login = JSON.parse(respuesta);
+                    if ($Login.Existe.Resultado === "Existe Cuenta") {
+                        Seguridad();
+                    } else if ($Login.Existe.Resultado === "Error Cuenta") {
                         $("#CI").addClass("error");
                         $("#pass").addClass("error");
                     } else {
@@ -206,7 +346,12 @@ $(document).ready(function () {
                             icon: 'error',
                             title: 'Error en el sistema',
                             text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
-                            confirmButtonText: 'Entendido'
+                            confirmButtonText: 'Entendido',
+                            timer: '2000',
+                            background: '#f1f1f1',
+                            backdrop: 'true',
+                            allowOutsideClick: 'false',
+                            allowEnterKey: 'false',
                         });
                     }
                 },
@@ -215,7 +360,12 @@ $(document).ready(function () {
                         icon: 'error',
                         title: 'No se Pudo conectar con el servidor',
                         text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
-                        confirmButtonText: 'Entendido'
+                        confirmButtonText: 'Entendido',
+                        timer: '2000',
+                        background: '#f1f1f1',
+                        backdrop: 'true',
+                        allowOutsideClick: 'false',
+                        allowEnterKey: 'false'
                     });
                 }
             });
@@ -250,3 +400,198 @@ const reloj = () => {
     const text = document.getElementById("reloj");
     text.innerHTML = moment().format('DD/MM/YY hh:mm');
 };
+
+const Seguridad = () => {
+    delete $Cantidad;
+    delete Cantidad;
+    $.ajax({
+        url: 'view/login/Seguridad.php',
+        type: 'GET',
+        beforeSend: function () {
+            console.log("Olvidar");
+        },
+        success(respuesta) {
+            $Cantidad = JSON.parse(respuesta);
+            Cantidad = Number($Cantidad.Cantidad.Resultado.Cantidad) + 1;
+            if (Cantidad <= 2) {
+                Swal.fire({
+                    title: 'Ingrese Pregunta y Respuesta de Seguridad Nº ' + Cantidad,
+                    background: '#f1f1f1',
+                    backdrop: 'true',
+                    allowOutsideClick: 'false',
+                    allowEnterKey: 'false',
+                    showDenyButton: 'true',
+                    confirmButtonText: 'Confirmar',
+                    denyButtonText: 'Cancelar',
+                    confirmButtonColor: '#13af01',
+                    denyButtonColor: '#b91d1d',
+                    html:
+                        '<div class="Swal group mx-auto">' +
+                        '<input type="text" id="Pregunta" class="input" required>' +
+                        '<span class="highlight"></span>' +
+                        '<span class="bar"></span>' +
+                        '<label>Pregunta</label>' +
+                        '</div>' +
+                        '<div class="Swal group mx-auto">' +
+                        '<input type="text" id="Respuesta" class="input" required>' +
+                        '<span class="highlight"></span>' +
+                        '<span class="bar"></span>' +
+                        '<label>Respuesta</label>' +
+                        '</div>'
+
+                }).then((result) => {
+                    if (result.isConfirmed && $('#Pregunta').val() !== "" && $('#Respuesta').val() !== "") {
+                        let Pregunta = $('#Pregunta').val();
+                        let Respuesta = $('#Respuesta').val();
+                        $.ajax({
+                            url: 'view/login/InsertSeguridad.php',
+                            type: 'POST',
+                            data: {
+                                Pregunta: Pregunta,
+                                Respuesta: Respuesta,
+                                beforeSend: function () {
+                                    console.log("Insert Seguridad");
+                                }
+                            },
+                            success(respuesta) {
+                                if (Cantidad <= 2) {
+                                    Seguridad();
+                                }
+                            },
+                            failure(respuesta) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'No se Pudo conectar con el servidor',
+                                    text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                                    confirmButtonText: 'Entendido',
+                                    timer: '2000',
+                                    background: '#f1f1f1',
+                                    backdrop: 'true',
+                                    allowOutsideClick: 'false',
+                                    allowEnterKey: 'false',
+                                });
+                            }
+                        });
+                    } else if (result.isConfirmed) {
+                        console.log('Vacio');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Uno o ambos de los campos se Encuantra Vacio',
+                            background: '#f1f1f1',
+                            backdrop: 'true',
+                            allowOutsideClick: 'false',
+                            allowEnterKey: 'false',
+                            timer: '3000'
+                        });
+                        $.ajax({
+                            url: 'view/login/ExisteUsuario.php',
+                            type: 'GET',
+                        });
+                    } else if (result.isDenied) {
+                        console.log('Cancel');
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Es necesario que ingreses la Pregunta de Seguridad y su Respuesta',
+                            background: '#f1f1f1',
+                            allowOutsideClick: 'false',
+                            backdrop: 'true',
+                            allowEnterKey: 'false',
+                            timer: '3000'
+                        });
+                        $.ajax({
+                            url: 'view/login/ExisteUsuario.php',
+                            type: 'GET',
+                        });
+                    }
+                });
+            } else {
+                Inicio();
+            }
+        },
+        failure(respuesta) {
+            Swal.fire({
+                icon: 'error',
+                title: 'No se Pudo conectar con el servidor',
+                text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                confirmButtonText: 'Entendido',
+                timer: '2000',
+                background: '#f1f1f1',
+                backdrop: 'true',
+                allowOutsideClick: 'false',
+                allowEnterKey: 'false',
+            });
+        }
+    });
+};
+
+const Inicio = () => {
+    $("#login").hide();
+    $("#SecRol").show();
+    $("#boton").hide();
+    $("#boton1").show()
+    $("#Ingresar").hide();
+    $('#ListadeRol').show();
+    $.ajax({
+        url: 'view/login/GetRol.php',
+        type: 'GET',
+        beforeSend: function () {
+            console.log("Get Rol");
+        },
+        success(respuesta) {
+            $Rol = JSON.parse(respuesta);
+            $rol = $Rol.Rol.Resultado;
+            $rol.forEach($sel => {
+                var group =
+                    '<div class="group mx-auto">' +
+                    '<div class="rol" id="' + $sel.Rol + '">' +
+                    '<div class="group--visibleToggle-eye">' +
+                    '<img src="view/login/assets/img/TickVacio.png"/>' +
+                    '</div>' +
+                    '<p>' +
+                    $sel.Rol +
+                    '</p>' +
+                    '</div>' +
+                    '</div>';
+                $("#ListadeRol").append(group);
+            });
+            $(".rol").on('click', function () {
+                $rol.forEach($sel => {
+                    if ($("#" + $sel.Rol + " div img").attr("src") === "view/login/assets/img/TickRelleno.png") {
+                        $("#" + $sel.Rol + " div img").attr("src", "view/login/assets/img/TickVacio.png");
+                    }
+                });
+                if ($("#" + $(this).attr('id') + " div img").attr("src") === "view/login/assets/img/TickVacio.png") {
+                    $("#" + $(this).attr('id') + " div img").attr("src", "view/login/assets/img/TickRelleno.png")
+                } else if ($("#" + $(this).attr('id') + " div img").attr("src") === "view/login/assets/img/TickRelleno.png") {
+                    $("#" + $(this).attr('id') + " div img").attr("src", "view/login/assets/img/TickVacio.png");
+                }
+            });
+            $("#boton1").on('click', function () {
+                $rol.forEach($sel => {
+                    if ($("#" + $sel.Rol + " div img").attr("src") === "view/login/assets/img/TickRelleno.png") {
+                        $inicio = $sel.Rol;
+                    }
+                });
+                if (typeof $inicio !== 'undefined') {
+                    if ($inicio !== null) {
+                        $.ajax({});
+                        console.log($inicio);
+                    }
+                }
+            });
+        },
+        failure(respuesta) {
+            Swal.fire({
+                icon: 'error',
+                title: 'No se Pudo conectar con el servidor',
+                text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                confirmButtonText: 'Entendido',
+                timer: '2000',
+                background: '#f1f1f1',
+                backdrop: 'true',
+                allowOutsideClick: 'false',
+                allowEnterKey: 'false',
+            });
+        }
+    });
+}

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="view\login\assets\img/LEM.svg">
+  <link rel="icon" type="image/x-icon" href="view\login\assets\img\login_files\LEM_Gris.svg">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet">
   <link href="view/login/assets/css/librerias/bootstrap.min.css" rel="stylesheet">
   <link href="view\login\assets\css\css.css" rel="stylesheet">
@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  <div class="row relative w-100 dentro ceromar overflowy">
+  <div class="row relative w-100 dentro ceromar scroll-box">
     <div class="login col centrar ceropad">
       <div class="d-block d-md-none relative w-100 chico">
         <div class="wrapper" id="seleccionado1">
@@ -54,12 +54,15 @@
         <img class="logo centrar" src="view\login\assets\img\LEM.svg">
       </div>
       <div class="caja relative m-auto centrar1">
-        <h3 id="login" class="d-block mauto">
+        <h3 id="login">
           Inicio de Sesion
-          </3h>
-          <span class="bar"></span>
+        </h3>
+        <h3 id="SecRol">
+          Seleccione el Rol
+        </h3>
+        <span class="bar"></span>
       </div>
-      <div class="ingresar w-100 relative">
+      <div class="ingresar w-100 relative" id="Ingresar">
         <div class="group mx-auto">
           <input type="number" id="CI" class="input" required>
           <span class="highlight"></span>
@@ -84,13 +87,20 @@
             ¿Has olvidado tu contraseña?
           </p>
         </div>
-        <div class="centrar1 martop">
-          <div class="button -blue relative"  id="boton">
-            <p>
-              Iniciar Sesion
-            </p>
-          </div>
-        </div>  
+      </div>
+      <div class="ingresar w-100 relative margintop scroll-box" id="ListadeRol">
+      </div>
+      <div class="centrar1 martop">
+        <div class="button -blue relative" id="boton">
+          <p id="Iniciar">
+            Iniciar Sesion
+          </p>
+        </div>
+        <div class="button -blue relative" id="boton1">
+          <p id="Sec">
+            Selecionar Rol
+          </p>
+        </div>
       </div>
     </div>
   </div>
