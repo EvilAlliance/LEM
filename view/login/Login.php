@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '\controller\CerrarSesion.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/controller/CerrarSesion.php';
 session_start();
 $_SESSION['CI'] = $_POST['CI'];
 $_SESSION['pass'] = $_POST['pass'];

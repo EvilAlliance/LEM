@@ -8,6 +8,7 @@ class controllerLogin
     {
         require_once $_SERVER['DOCUMENT_ROOT'] . '/view/login/assets/index.php';
     }
+
     public function IniciarSesion($CI, $pass)
     {
         $Peticion = new stdClass();
@@ -71,11 +72,17 @@ class controllerLogin
         return $Peticion;
         mysqli_close($this->conexion);
     }
+
     public function importarRoles($CI)
     {
         $Peticion = new stdClass();
         $model = new modelLogin();
         $Peticion->Rol = $model->GetRol($CI);
         return $Peticion;
+    }
+
+    public function Pestana($Pestana)
+    {
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/view/$Pestana/assets/index.php";
     }
 }
