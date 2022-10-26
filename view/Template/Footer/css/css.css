@@ -1,0 +1,108 @@
+/*footer*/
+
+.footer {
+    border-top: 3px solid #0014A7;
+    height: 50px;
+    background-color: #f1f1f1;
+    box-shadow: 0px 1px 0.9em #0013a77f;
+}
+
+#reloj {
+    font-size: 22px;
+    font-weight: 900;
+    margin-right: 20px;
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    transform: translate(0%, -50%);
+}
+
+
+.wrapper {
+    margin-left: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    z-index: 1;
+}
+
+.wrapper#ayuda {
+    left: 60px;
+}
+
+.select-language {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    border-radius: 50%;
+    border: 1px solid #001834;
+    position: relative;
+}
+
+.select-language .select-language-container {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.select-language-container .eng {
+    /*margin:-4px 0 0 -8px;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+}
+
+.select-language .select-language-container .uru {
+    /*margin:-4px 0 0 -8px;*/
+    position: absolute;
+    top: 50%;
+    left: 6%;
+    transform: translate(-6%, -50%);
+    width: 50px;
+}
+
+.wrapper#ayuda .select-language .select-language-container {
+    background-color: #3048dbad;
+}
+
+.select-language .select-language-container p {
+    /*margin:-4px 0 0 -8px;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#menu .select-language-container .uru {
+    border: 1px solid #001834e5 !important;
+}
+
+#menu .select-language-container .eng {
+    border: 1px solid #001834e5 !important;
+}
+
+.wrapper#menu.slideup {
+    z-index: 2 !important;
+}
+
+.wrapper#menu.slidedown {
+    z-index: 0 !important;
+}
+
+.ceropad {
+    padding: 0px;
+}
+
+.ceromar {
+    margin: 0px;
+}

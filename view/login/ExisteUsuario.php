@@ -1,8 +1,7 @@
 <?php
 session_start();
-$_SESSION['CI'] = $_POST['CI'];
-
-if ($_SESSION['CI'] !== null) {
+if ($_POST['CI'] !== null) {
+    $_SESSION['CI']=$_POST['CI'];
     require_once $_SERVER['DOCUMENT_ROOT'] . '/controller/login.php';
     $controller = new controllerLogin;
     $resultado = $controller->GetCuenta($_SESSION['CI']);

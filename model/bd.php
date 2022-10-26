@@ -7,8 +7,6 @@ class Conectar
 
 	private $host;
 	private $db;
-	private $user;
-	private $pass;
 	private $conexion;
 
 	public function __construct()
@@ -19,9 +17,9 @@ class Conectar
 
 	public function Conexion($user, $pass)
 	{
-		$this->conexion = mysqli_connect($this->host, $user, $pass, $this->db);
+		$this->conexion = @mysqli_connect($this->host, $user, $pass, $this->db);
 		if (!$this->conexion) {
-			return "Error";
+			return "Error"; 
 		} else {
 			$this->conexion->set_charset("utf8");
 			return $this->conexion;

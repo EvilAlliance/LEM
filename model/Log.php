@@ -18,7 +18,7 @@ class Log
     public function Registro($CI, $Seccion, $Descirpcion)
     {
         $Devolver = new stdClass();
-        $query = "INSERT INTO Registro(Seccion, Descripcion, Fecha) VALUE('$Seccion,', '$Descirpcion', NOW());";
+        $query = "INSERT INTO Registro(Seccion, Descripcion, Fecha) VALUE('$Seccion', '$Descirpcion', NOW());";
         if ($this->conexion !== "Error") {
             $peticion = mysqli_query($this->conexion, $query);
             if (!$peticion) {

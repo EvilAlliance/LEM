@@ -83,6 +83,6 @@ class controllerLogin
 
     public function Pestana($Pestana)
     {
-        require_once $_SERVER['DOCUMENT_ROOT'] . "/view/$Pestana/assets/index.php";
+        header($_SERVER['DOCUMENT_ROOT'] . "/view/$Pestana/assets/index.php");
     }
 }

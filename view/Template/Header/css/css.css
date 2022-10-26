@@ -1,0 +1,15 @@
+.barra {
+    border-bottom: 3px solid #0014A7;
+    height: 100px;
+    position: relative;
+    background-color: #f1f1f1;
+    box-shadow: 0px 1px 0.9em #0013a77f;
+}
+
+.ceropad {
+    padding: 0px;
+}
+
+.ceromar {
+    margin: 0px;
+}

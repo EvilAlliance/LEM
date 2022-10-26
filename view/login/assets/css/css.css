@@ -1,3 +1,7 @@
+:root {
+    scroll-behavior: smooth;
+}
+
 .scroll-box {
     width: 100%;
     height: 295px;
@@ -52,13 +56,7 @@ body {
 
 /*header*/
 
-.barra {
-    border-bottom: 3px solid #0014A7;
-    height: 100px;
-    position: relative;
-    background-color: #f1f1f1;
-    box-shadow: 0px 1px 0.9em #0013a77f;
-}
+
 
 .logo {
     width: 75px;
@@ -68,26 +66,6 @@ body {
 .chico .logo {
     width: 50px !important;
     margin-left: 0px;
-}
-
-/*footer*/
-
-.footer {
-    border-top: 3px solid #0014A7;
-    height: 50px;
-    position: relative;
-    background-color: #f1f1f1;
-    box-shadow: 0px 1px 0.9em #0013a77f;
-}
-
-#reloj {
-    font-size: 22px;
-    font-weight: 900;
-    margin-right: 20px;
-    position: absolute;
-    top: 50%;
-    right: 1%;
-    transform: translate(0%, -50%);
 }
 
 /*idoma*/
@@ -157,28 +135,12 @@ body {
     font-weight: 500;
 }
 
-#menu .select-language-container .uru {
-    border: 1px solid #001834e5 !important;
-}
-
-#menu .select-language-container .eng {
-    border: 1px solid #001834e5 !important;
-}
-
 #menu1 .select-language-container .uru {
     border: 1px solid #001834e5 !important;
 }
 
 #menu1 .select-language-container .eng {
     border: 1px solid #001834e5 !important;
-}
-
-.wrapper#menu.slideup {
-    z-index: 1 !important;
-}
-
-.wrapper#menu.slidedown {
-    z-index: -1 !important;
 }
 
 .wrapper#menu1.slideup {
@@ -216,7 +178,7 @@ body {
         min-height: 100vh;
     }
 
-    .group {
+    .group {    
         width: 85% !important;
     }
 
@@ -238,6 +200,10 @@ body {
         position: absolute;
         right: 0px !important;
         margin-right: 25px;
+    }
+
+    .martop{
+        margin-top: 2% !important;
     }
 }
 
@@ -348,12 +314,12 @@ body {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    appearance: none;
     margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .input:focus {
@@ -566,10 +532,6 @@ label {
 }
 
 /*temaplate*/
-
-.cienwid {
-    width: 100%;
-}
 
 .ceropad {
     padding: 0px;
