@@ -1,10 +1,11 @@
-$(window).on('load', function () {
-    $("#menu").hide();
-    reloj();
-    setInterval(reloj, 1000);
+$(document).on('ready', function () {
+    
 });
 
 $(document).ready(function () {
+    $("#menu").hide();
+    reloj();
+    setInterval(reloj, 1000);
     $("#seleccionado").on('click', function () {
         console.log('idioma');
         if ($("#menu").css('display') != 'none') {

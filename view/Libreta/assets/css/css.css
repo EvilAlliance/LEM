@@ -1,0 +1,301 @@
+:root {
+    scroll-behavior: smooth;
+}
+
+.scroll-box {
+    width: 100%;
+    height: 295px;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+
+.scroll-box::-webkit-scrollbar {
+    width: .4em;
+}
+
+.scroll-box::-webkit-scrollbar,
+.scroll-box::-webkit-scrollbar-thumb {
+    scroll-behavior: smooth;
+    overflow: visible;
+    border-radius: 4px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .2);
+}
+
+.cover-bar {
+    position: absolute;
+    background: #fff;
+    ;
+    height: 100%;
+    top: 0;
+    right: 0;
+    width: .4em;
+    -webkit-transition: all .5s;
+    opacity: 1;
+}
+
+/* MAGIC HAPPENS HERE */
+.scroll-bar-wrap:hover .cover-bar {
+    opacity: 0;
+    -webkit-transition: all .5s;
+}
+
+* {
+    font-family: 'Poppins';
+}
+
+body {
+    min-height: 100%;
+    background-color: #FFFDF4;
+    position: absolute;
+    margin: 0%;
+    min-width: 100%;
+}
+
+/*temaplate*/
+
+.ceropad {
+    padding: 0px;
+}
+
+.ceromar {
+    margin: 0px;
+}
+
+.cuarenta {
+    height: 40px;
+}
+
+.cienheig {
+    height: 100vh;
+}
+
+.centrar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.centrarhorizontalmente {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.centrar1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overflowy {
+    overflow-y: auto;
+}
+
+.relative {
+    position: relative;
+}
+
+.martop {
+    margin-top: 15%;
+}
+
+.margintop {
+    margin-top: 60px;
+}
+
+.dentro {
+    height: calc(100vh - 150px);
+}
+
+.overhidden {
+    overflow: hidden;
+
+}
+
+.navbar {
+    background-color: #f1f1f1;
+    box-shadow: 0px 1px 0.9em #0013a77f;
+    top: 0;
+    left: 0;
+}
+
+.navbar :is(div.row) :is(div) :is(p) {
+    font-size: calc(14px + 6 * ((100vw - 320px) / 680));
+}
+
+.navbar :is(div.row) :is(div) :is(img) {
+    width: 40px;
+}
+
+.module {
+    margin-left: 10%;
+    margin-right: 5%;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #e5e4e4;
+    width: 80%;
+    min-height: 60px;
+    cursor: pointer;
+}
+
+.module.inactive {
+    opacity: 60%;
+}
+
+/*Libreta*/
+
+.libreta {
+    margin: 40px ;
+    background-color: #f1f1f1;
+    position: relative;
+    min-width: 340px;
+    max-width: 440px;
+    min-height: 310px;
+    max-height: 350px;
+    border-radius: 20px;
+    box-shadow: 0px 1px 0.9em #0013a77f;
+}
+
+.libreta .titulo{
+    margin-top: 20px;
+}
+
+.libreta .subtitulo{
+    margin-top: 0px;
+}
+
+/*
+.libreta2{
+	background-color: white;
+	position: relative;
+	width: 460px;
+	height: 270px;
+	top: 55px;
+	left: 10px;
+	border: 2px solid #0014A7;
+    border-radius: 10px;
+}
+*/
+
+/*Contenido Libreta*/
+
+.seleccionar{
+    margin-top: 50px;
+}
+
+.centrarhorizontalmente {
+    display: flex;
+    justify-content: center;
+}
+
+.marginleft3{
+    margin-left: 27px;
+    margin-top: 4px;
+}
+
+/* Alumnos */
+.Alumno {
+    position: relative;
+    max-width: 306px;
+    min-width: 306px;
+    min-height: 330px;
+    max-height: 396px;
+    border: 2px #0014a7 solid;
+    border-radius: 10px 0px 10px 0px;
+    left: 35px;
+    box-shadow: 0px 1px 0.9em #0013a77f;
+    margin-left: 60px;
+    margin-top: 20px;
+    margin-bottom: 75px;
+  }
+  
+  /* Foto de alumnos */
+  
+  .Alumnos {
+    position: relative;
+    max-height: 250px;
+    max-width: 306px;
+    min-width: 250px;
+    min-height: 300px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 10px 0px 0px 0px;
+  }
+
+  /*Datos*/
+  
+  .NomAlu {
+    position: relative;
+    background-color: white;
+    right: 0px;
+    border-width: 2px 2px 2px 0px;
+    border-style: solid;
+    border-color: #0014a7;
+    min-height: 40px;
+  }
+  
+  .NumAlu {
+    position: relative;
+    background-color: white;
+    left: 0px;
+    border-width: 2px 0px 2px 0px;
+    border-style: solid;
+    border-color: #0014a7;
+    min-height: 40px;
+  }
+  
+  :is(.NomAlu) :is(p) {
+    font-size: 20px;
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+  
+  :is(.NumAlu) :is(p) {
+    font-size: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .CedulaAlu{
+    position: relative;
+    background-color: white;
+    right: 0px;
+    border-width: 0px 0px 0px 1px;
+    border-bottom:  solid #0014a7;
+    min-height: 26px;
+    height: 100%;
+    width: 100%;
+  }
+
+  :is(.CedulaAlu) :is(p) {
+    font-size: 18px;
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+
+  .DirecAlu{
+    position: relative;
+    background-color: white;
+    right: 0px;
+    min-height: 26px;
+    height: 100%;
+    width: 100%;
+    border-radius: 0PX 0PX 10px 0px;
+  }
+  :is(.DirecAlu) :is(p) {
+    font-size: 18px;
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }

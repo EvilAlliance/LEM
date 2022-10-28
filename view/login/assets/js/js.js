@@ -3,7 +3,21 @@ $(window).on('load', function () {
     $("#menu1").hide();
     $("#SecRol").hide();
     $("#boton1").hide();
-    $('#ListadeRol').hide();    
+    $('#ListadeRol').hide();
+    $('#rol').hide();
+    $('#CerrarSesion').hide();
+    $('#drop').hide();
+    /*if (localStorage.getItem('Login') !== 'true') {
+        localStorage.setItem('Login', true);
+        localStorage.setItem('Libreta', false);
+        $.ajax({
+            url: '/view/login/Sesion.php',
+            type: 'GET',
+            success(respuesta) {
+                window.location.href = respuesta;
+            }
+        });
+    }*/
 });
 
 $(document).ready(function () {
@@ -66,7 +80,7 @@ $(document).ready(function () {
             if ($('#CIolvido').val() !== "") {
                 let CI = $('#CIolvido').val();
                 $.ajax({
-                    url: 'view/login/ExisteUsuario.php',
+                    url: '/view/login/ExisteUsuario.php',
                     type: 'POST',
                     data: {
                         CI: CI,
@@ -78,7 +92,7 @@ $(document).ready(function () {
                         $Cuenta = JSON.parse(respuesta);
                         if ($Cuenta.Existe.Resultado === "Existe Usuario") {
                             $.ajax({
-                                url: 'view/login/Seguridad.php',
+                                url: '/view/login/Seguridad.php',
                                 type: 'Get',
                                 beforeSend: function () {
                                     console.log("Cantidad de Seguridad");
@@ -87,7 +101,7 @@ $(document).ready(function () {
                                     $Cantidad = JSON.parse(respuesta);
                                     if (Number($Cantidad.Cantidad.Resultado.Cantidad) === 2) {
                                         $.ajax({
-                                            url: 'view/login/Olvidar.php',
+                                            url: '/view/login/Olvidar.php',
                                             type: 'Get',
                                             beforeSend: function () {
                                                 console.log("Pregunta y Respuesta de Seguridad");
@@ -171,7 +185,7 @@ $(document).ready(function () {
                                                     }
                                                 });
                                             },
-                                            failure(respuesta) {
+                                            error(jqXHR, textStatus, errorThrown) {
                                                 Swal.fire({
                                                     icon: 'error',
                                                     title: 'No se Pudo conectar con el servidor',
@@ -197,7 +211,7 @@ $(document).ready(function () {
                                         });
                                     }
                                 },
-                                failure(respuesta) {
+                                error(jqXHR, textStatus, errorThrown) {
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'No se Pudo conectar con el servidor',
@@ -237,7 +251,7 @@ $(document).ready(function () {
                             });
                         }
                     },
-                    failure(respuesta) {
+                    error(jqXHR, textStatus, errorThrown) {
                         Swal.fire({
                             icon: 'error',
                             title: 'No se Pudo conectar con el servidor',
@@ -278,7 +292,7 @@ $(document).ready(function () {
             $("#pass").removeClass("error");
             $("#CI").removeClass("error");
             $.ajax({
-                url: 'view/login/Login.php',
+                url: '/view/login/Login.php',
                 type: 'POST',
                 data: {
                     CI: CI,
@@ -308,7 +322,7 @@ $(document).ready(function () {
                         });
                     }
                 },
-                failure(respuesta) {
+                error(jqXHR, textStatus, errorThrown) {
                     Swal.fire({
                         icon: 'error',
                         title: 'No se Pudo conectar con el servidor',
@@ -353,7 +367,7 @@ const Seguridad = () => {
     delete $Cantidad;
     delete Cantidad;
     $.ajax({
-        url: 'view/login/Seguridad.php',
+        url: '/view/login/Seguridad.php',
         type: 'GET',
         beforeSend: function () {
             console.log("Olvidar");
@@ -392,7 +406,7 @@ const Seguridad = () => {
                         let Pregunta = $('#Pregunta').val();
                         let Respuesta = $('#Respuesta').val();
                         $.ajax({
-                            url: 'view/login/InsertSeguridad.php',
+                            url: '/view/login/InsertSeguridad.php',
                             type: 'POST',
                             data: {
                                 Pregunta: Pregunta,
@@ -406,7 +420,7 @@ const Seguridad = () => {
                                     Seguridad();
                                 }
                             },
-                            failure(respuesta) {
+                            error(jqXHR, textStatus, errorThrown) {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'No se Pudo conectar con el servidor',
@@ -448,7 +462,7 @@ const Seguridad = () => {
                 Inicio();
             }
         },
-        failure(respuesta) {
+        error(jqXHR, textStatus, errorThrown) {
             Swal.fire({
                 icon: 'error',
                 title: 'No se Pudo conectar con el servidor',
@@ -472,7 +486,7 @@ const Inicio = () => {
     $("#Ingresar").hide();
     $('#ListadeRol').show();
     $.ajax({
-        url: 'view/login/GetRol.php',
+        url: '/view/login/GetRol.php',
         type: 'GET',
         beforeSend: function () {
             console.log("Get Rol");
@@ -485,7 +499,7 @@ const Inicio = () => {
                     '<div class="group mx-auto">' +
                     '<div class="rol" id="' + $sel.Rol.replace(" ", "") + '">' +
                     '<div class="group--visibleToggle-eye">' +
-                    '<img src="view/login/assets/img/TickVacio.png"/>' +
+                    '<img src="/view/login/assets/img/TickVacio.png"/>' +
                     '</div>' +
                     '<p>' +
                     $sel.Rol +
@@ -497,20 +511,20 @@ const Inicio = () => {
             });
             $(".rol").on('click', function () {
 
-                if ($("#" + $(this).attr('id') + " div img").attr("src") === "view/login/assets/img/TickVacio.png") {
+                if ($("#" + $(this).attr('id') + " div img").attr("src") === "/view/login/assets/img/TickVacio.png") {
                     $rol.forEach($sel => {
-                        if ($("#" + $sel.Rol + " div img").attr("src") === "view/login/assets/img/TickRelleno.png") {
-                            $("#" + $sel.Rol + " div img").attr("src", "view/login/assets/img/TickVacio.png");
+                        if ($("#" + $sel.Rol + " div img").attr("src") === "/view/login/assets/img/TickRelleno.png") {
+                            $("#" + $sel.Rol + " div img").attr("src", "/view/login/assets/img/TickVacio.png");
                         }
                     });
-                    $("#" + $(this).attr('id') + " div img").attr("src", "view/login/assets/img/TickRelleno.png")
-                } else if ($("#" + $(this).attr('id') + " div img").attr("src") === "view/login/assets/img/TickRelleno.png") {
-                    $("#" + $(this).attr('id') + " div img").attr("src", "view/login/assets/img/TickVacio.png");
+                    $("#" + $(this).attr('id') + " div img").attr("src", "/view/login/assets/img/TickRelleno.png")
+                } else if ($("#" + $(this).attr('id') + " div img").attr("src") === "/view/login/assets/img/TickRelleno.png") {
+                    $("#" + $(this).attr('id') + " div img").attr("src", "/view/login/assets/img/TickVacio.png");
                 }
             });
             $("#boton1").on('click', function () {
                 $rol.forEach($sel => {
-                    if ($("#" + $sel.Rol + " div img").attr("src") === "view/login/assets/img/TickRelleno.png") {
+                    if ($("#" + $sel.Rol + " div img").attr("src") === "/view/login/assets/img/TickRelleno.png") {
                         $inicio = $sel.Rol;
                     }
                 });
@@ -518,7 +532,7 @@ const Inicio = () => {
                     if ($inicio !== null) {
                         console.log($inicio);
                         $.ajax({
-                            url: 'view/login/Pestana.php',
+                            url: '/view/login/Pestana.php',
                             type: 'GET',
                             data: {
                                 pestana: $inicio,
@@ -526,12 +540,16 @@ const Inicio = () => {
                                     console.log("Pestana " + $inicio);
                                 }
                             },
+                            success(respuesta) {
+                                window.location.href = respuesta;
+                                localStorage.setItem('Verificacion', false);
+                            }
                         });
                     }
                 }
             });
         },
-        failure(respuesta) {
+        error(jqXHR, textStatus, errorThrown) {
             Swal.fire({
                 icon: 'error',
                 title: 'No se Pudo conectar con el servidor',

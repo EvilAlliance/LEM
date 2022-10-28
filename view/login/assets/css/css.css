@@ -43,7 +43,7 @@
 }
 
 * {
-    font-family: 'Poppins';
+    font-family: 'Poppins' !important;
 }
 
 body {
@@ -55,13 +55,6 @@ body {
 }
 
 /*header*/
-
-
-
-.logo {
-    width: 75px;
-    margin-left: 30px;
-}
 
 .chico .logo {
     width: 50px !important;

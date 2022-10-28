@@ -6,7 +6,7 @@ class controllerLogin
 {
     public function Iniciar()
     {
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/view/login/assets/index.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/view/login/assets/index.php';
     }
 
     public function IniciarSesion($CI, $pass)
@@ -83,6 +83,8 @@ class controllerLogin
 
     public function Pestana($Pestana)
     {
-        header($_SERVER['DOCUMENT_ROOT'] . "/view/$Pestana/assets/index.php");
+        if ($Pestana==='Docente'){
+            return '/view/Libreta/assets/index.php';
+        }
     }
 }
