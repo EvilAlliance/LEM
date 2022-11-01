@@ -149,7 +149,7 @@ body {
 /*Libreta*/
 
 .libreta {
-    margin: 40px ;
+    margin: 40px;
     background-color: #f1f1f1;
     position: relative;
     min-width: 340px;
@@ -160,11 +160,11 @@ body {
     box-shadow: 0px 1px 0.9em #0013a77f;
 }
 
-.libreta .titulo{
+.libreta .titulo {
     margin-top: 20px;
 }
 
-.libreta .subtitulo{
+.libreta .subtitulo {
     margin-top: 0px;
 }
 
@@ -183,7 +183,7 @@ body {
 
 /*Contenido Libreta*/
 
-.seleccionar{
+.seleccionar {
     margin-top: 50px;
 }
 
@@ -192,13 +192,13 @@ body {
     justify-content: center;
 }
 
-.marginleft3{
+.marginleft3 {
     margin-left: 27px;
     margin-top: 4px;
 }
 
 /* Alumnos */
-.Alumno {
+.Alumno1 {
     position: relative;
     max-width: 306px;
     min-width: 306px;
@@ -211,11 +211,22 @@ body {
     margin-left: 60px;
     margin-top: 20px;
     margin-bottom: 75px;
-  }
-  
-  /* Foto de alumnos */
-  
-  .Alumnos {
+}
+
+.Alumno#Persona1 {
+    max-width: 306px;
+    min-width: 306px;
+    min-height: 330px;
+    max-height: 396px;
+    border: 2px #0014a7 solid;
+    border-radius: 10px 0px 10px 0px;
+    box-shadow: 0px 1px 0.9em #0013a77f;
+    margin: auto;
+}
+
+/* Foto de alumnos */
+
+.Alumnos {
     position: relative;
     max-height: 250px;
     max-width: 306px;
@@ -224,11 +235,11 @@ body {
     padding-left: 0px;
     padding-right: 0px;
     border-radius: 10px 0px 0px 0px;
-  }
+}
 
-  /*Datos*/
-  
-  .NomAlu {
+/*Datos*/
+
+.NomAlu {
     position: relative;
     background-color: white;
     right: 0px;
@@ -236,9 +247,9 @@ body {
     border-style: solid;
     border-color: #0014a7;
     min-height: 40px;
-  }
-  
-  .NumAlu {
+}
+
+.NumAlu {
     position: relative;
     background-color: white;
     left: 0px;
@@ -246,44 +257,44 @@ body {
     border-style: solid;
     border-color: #0014a7;
     min-height: 40px;
-  }
-  
-  :is(.NomAlu) :is(p) {
+}
+
+:is(.NomAlu) :is(p) {
     font-size: 20px;
     position: absolute;
     left: 18px;
     top: 50%;
     transform: translate(0%, -50%);
-  }
-  
-  :is(.NumAlu) :is(p) {
+}
+
+:is(.NumAlu) :is(p) {
     font-size: 20px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
-  .CedulaAlu{
+.CedulaAlu {
     position: relative;
     background-color: white;
     right: 0px;
     border-width: 0px 0px 0px 1px;
-    border-bottom:  solid #0014a7;
+    border-bottom: solid #0014a7;
     min-height: 26px;
     height: 100%;
     width: 100%;
-  }
+}
 
-  :is(.CedulaAlu) :is(p) {
+:is(.CedulaAlu) :is(p) {
     font-size: 18px;
     position: absolute;
     left: 18px;
     top: 50%;
     transform: translate(0%, -50%);
-  }
+}
 
-  .DirecAlu{
+.DirecAlu {
     position: relative;
     background-color: white;
     right: 0px;
@@ -291,11 +302,341 @@ body {
     height: 100%;
     width: 100%;
     border-radius: 0PX 0PX 10px 0px;
-  }
-  :is(.DirecAlu) :is(p) {
+}
+
+:is(.DirecAlu) :is(p) {
     font-size: 18px;
     position: absolute;
     left: 18px;
     top: 50%;
     transform: translate(0%, -50%);
-  }
+}
+
+.Calificaciones {
+    position: relative;
+    max-width: 1000px;
+    min-width: 1000px;
+    max-height: 100px;
+    min-height: 100px;
+    background-color: white;
+    border: 2px #0014A7 solid;
+    border-radius: 10px 0px 10px 0px;
+    box-shadow: 0px 1px 0.9em #0013a77f;
+    margin: 40px;
+    top: 20px
+}
+
+.numeroAlu {
+    position: relative;
+    background-color: white;
+    max-width: 100px;
+    min-width: 100px;
+    max-height: 96px;
+    min-height: 96px;
+    border-right: 2px solid #0014A7;
+    border-radius: 10px 0px 0px 0px;
+    margin-top: 0px;
+}
+
+.NLista {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+.numAlu {
+    position: relative;
+    background-color: white;
+    max-width: 98px;
+    min-width: 98px;
+    max-height: 50px;
+    min-height: 50px;
+    border-top: 2px solid #0014A7;
+    left: -12px;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 26px;
+}
+
+.TipoCali {
+    position: relative;
+    background-color: white;
+    max-width: 160px;
+    min-width: 169px;
+    max-height: 96px;
+    min-height: 96px;
+    border-right: 2px solid #0014A7;
+    border-radius: 10px 0px 0px 0px;
+    margin-top: 0px;
+}
+
+.TipoC {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+.SelecTipo {
+    position: relative;
+    border-top: 2px solid #0014A7;
+    margin-top: 0px;
+    max-width: 169px;
+    min-width: 169px;
+    left: -12px
+}
+
+
+select {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.tamano {
+    max-width: 135px;
+    min-width: 135px;
+}
+
+select {
+    text-align: center;
+    position: relative;
+    left: 10px;
+    background-color: #d1e8ff;
+    border: 2px solid #0014A7;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.Calif {
+    position: relative;
+    background-color: white;
+    max-width: 100px;
+    min-width: 100px;
+    max-height: 96px;
+    min-height: 96px;
+    border-right: 2px solid #0014A7;
+    border-radius: 10px 0px 0px 0px;
+    margin-top: 0px;
+}
+
+.nota {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+.numnota {
+    position: relative;
+    background-color: white;
+    max-width: 98px;
+    min-width: 98px;
+    max-height: 50px;
+    min-height: 50px;
+    border-top: 2px solid #0014A7;
+    left: -12px;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 26px;
+}
+
+.calif {
+    position: relative;
+    max-width: 50px;
+    min-width: 50px;
+    max-height: 40px;
+    min-height: 40px;
+    background-color: #d1e8ff;
+    border: 2px solid #0014A7;
+    border-radius: 5px;
+    font-size: 22px;
+    color: #000000;
+    text-align: center;
+}
+
+.descripcion {
+    position: relative;
+    background-color: white;
+    max-width: 250px;
+    max-height: 96px;
+    min-height: 96px;
+    margin-top: 0px;
+    border-right: 2px solid #0014A7;
+}
+
+.descripcion1 {
+    position: relative;
+    background-color: white;
+    max-width: 350px;
+    max-height: 96px;
+    min-height: 96px;
+    margin-top: 0px;
+}
+
+input[type=number] {
+    -webkit-user-select: textfield;
+    -ms-user-select: textfield;
+    user-select: textfield;
+}
+
+#Ingresar .group {
+    position: relative;
+    margin-top: 60px;
+    width: 70%;
+}
+
+#ListadeRol div.group {
+    position: relative;
+    margin-top: 17px;
+    margin-bottom: 17px;
+    width: 70%;
+}
+
+.rol p {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.group.Swal {
+    position: relative;
+    margin-top: 20px;
+    width: 70%;
+}
+
+.input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+    background-color: #f1f1f1;
+}
+
+.input.error {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid red;
+    background-color: #f1f1f1;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+}
+
+.input:focus {
+    outline: none;
+}
+
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.input:focus~label,
+.input:valid~label {
+    top: -20px;
+    font-size: 14px;
+    color: #5264AE;
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.bar:before,
+.bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+.input:focus~.bar:before,
+.input:focus~.bar:after {
+    width: 50%;
+}
+
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* active state */
+.input:focus~.highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS */
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}

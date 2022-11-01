@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Libreta.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Log.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Amari/model/Libreta.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Amari/model/Log.php';
 
 class controllerLibreta
 {
@@ -16,6 +16,13 @@ class controllerLibreta
         $Peticion = new stdClass();
         $model = new modelLibreta();
         $Peticion->Estudiante = $model->GetEstudiante($Libretita);
+        return $Peticion;
+    }
+    public function SerCalificacion($CI, $Libretita, $nota, $tipo, $descripcion)
+    {
+        $Peticion = new stdClass();
+        $model = new modelLibreta();
+        $Peticion->Estudiante = $model->SetCalificacion($CI, $Libretita, $nota, $tipo, $descripcion);
         return $Peticion;
     }
 }

@@ -1,6 +1,6 @@
 $(window).on('load', function () {
     $.ajax({
-        url: '/view/Template/Header/GetRol.php',
+        url: '/Amari/view/Template/Header/GetRol.php',
         type: 'GET',
         beforeSend: function () {
             console.log("Get Rol");
@@ -44,13 +44,13 @@ $(window).on('load', function () {
 $(document).ready(function () {
     $('#CerrarSesion').on('click', function () {
         $.ajax({
-            url: '/view/Template/Header/CerrarSesion.php',
+            url: '/Amari/view/Template/Header/CerrarSesion.php',
             type: 'GET',
             beforeSend: function () {
                 console.log("Get Rol");
             },
             success(respuesta) {
-                window.location.href = '/Index.php';
+                window.location.href = '/Amari/Index.php';
             },
             error(jqXHR, textStatus, errorThrown) {
                 Swal.fire({

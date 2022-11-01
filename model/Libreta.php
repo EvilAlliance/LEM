@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/bd.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Amari/model/bd.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Amari/config/config.php';
 
 class modelLibreta
 {
@@ -28,8 +28,8 @@ class modelLibreta
                 $Devolver->Error = mysqli_error($this->conexion);
                 return $Devolver;
             } else {;
-                while($columna = mysqli_fetch_assoc($peticion)) {
-                    $Libreta [] = array(
+                while ($columna = mysqli_fetch_assoc($peticion)) {
+                    $Libreta[] = array(
                         'Nombre' => $columna['Nombre'],
                         'Apellido' => $columna['Apellido'],
                         'Asignatura' => $columna['Asignatura'],
@@ -62,8 +62,8 @@ class modelLibreta
                 $Devolver->Error = mysqli_error($this->conexion);
                 return $Devolver;
             } else {;
-                while($columna = mysqli_fetch_assoc($peticion)) {
-                    $Estudiante [] = array(
+                while ($columna = mysqli_fetch_assoc($peticion)) {
+                    $Estudiante[] = array(
                         'CI' => $columna['CI'],
                         'Nombre' => $columna['Apellido'],
                         'Apellido' => $columna['Nombre'],
@@ -75,6 +75,39 @@ class modelLibreta
                 $Devolver->Resultado = $Estudiante;
                 $Devolver->Error = mysqli_error($this->conexion);
                 return $Devolver;
+            }
+        } else {
+            $Devolver->Resultado = "Error en Base de Datos";
+            return $Devolver;
+        }
+    }
+    public function SetCalificacion($CI, $Libretita, $nota, $tipo, $descripcion)
+    {
+        $Devolver = new stdClass();
+        $query = "INSERT INTO Calificacion(Fecha, Tipo, Descripcion) VALUE(now(), '$tipo', '$descripcion');";
+        if ($this->conexion !== "Error") {
+            $peticion = mysqli_query($this->conexion, $query);
+            if (!$peticion) {
+                $Devolver->Resultado = "Error Peticion Insert Seguridad";
+                $Devolver->Query = $query;
+                $Devolver->Error = mysqli_error($this->conexion);
+            } else {
+                $Devolver->Resultado = "Exito Peticion Insert Seguridad";
+                $ID = mysqli_insert_id($this->conexion);
+                $query = "INSERT INTO Consiguio(ID, CI, Nota) VALUE('$ID', '$CI', '$nota');";
+                $peticion = mysqli_query($this->conexion, $query);
+                if (!$peticion) {
+                    $Devolver->Resultado = "Error Peticion Insert Seguridad";
+                    $Devolver->Query = $query;
+                    $Devolver->Error = mysqli_error($this->conexion);
+                } else {
+                    $Devolver->Resultado = "Exito Peticion Insert Seguridad";
+                    $query = "INSERT INTO Pertenece(ID, Nombre, Orientacion, Curso, Grado, Turno, Ano) VALUE('$ID', '$Libretita[Asignatura]', '$Libretita[Orientacion]', '$Libretita[Curso]', '$Libretita[Grado]', '$Libretita[Grado]', '$Libretita[Grupo]', '$Libretita[Turno]', $Libretita[Año]);";
+                    $peticion = mysqli_query($this->conexion, $query);
+                    $Devolver->Error = mysqli_error($this->conexion);
+                    return $Devolver;
+                    return $Devolver;
+                }
             }
         } else {
             $Devolver->Resultado = "Error en Base de Datos";

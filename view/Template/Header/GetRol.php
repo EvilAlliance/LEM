@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['Rol'])){
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/controller/login.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Amari/controller/login.php';
     $controller = new controllerLogin;
     $resultado = $controller->importarRoles($_SESSION['CI']);
     $resultado -> Eleccion = $_SESSION['Rol'];

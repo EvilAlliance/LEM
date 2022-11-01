@@ -5,7 +5,7 @@ $(window).on('load', function () {
                             localStorage.setItem('Login', true);
                         localStorage.setItem('Libreta', false);
                         $.ajax({
-                            url: '/view/login/Sesion.php',
+                            url: '/Amari/view/login/Sesion.php',
                         type: 'GET',
                         success(respuesta) {
                             window.location.href = respuesta;
@@ -29,10 +29,12 @@ window.addEventListener("visibilitychange", () => {
 });
 
 const Libretas = () => {
+    $(".module").addClass("inactive");
+    $("#Libretas").removeClass("inactive");
     $("#Content").empty();
     $("#Libretas a div img").attr('src', $("#Libretas a div img").attr('src').replace('folder.png', 'folder (1).png'));
     $.ajax({
-        url: '/view/Libreta/GetLibreta.php',
+        url: '/Amari/view/Libreta/GetLibreta.php',
         type: 'Get',
         beforeSend: function () {
             console.log('Lista de Libretas')
@@ -103,7 +105,7 @@ const Estudiante = () => {
     $("#Content").empty();
     $Libretita = JSON.parse(localStorage.getItem("LibretaSel"));
     $.ajax({
-        url: '/view/Libreta/GetAlumno.php',
+        url: '/Amari/view/Libreta/GetAlumno.php',
         type: 'POST',
         data: {
             Libreta: $Libretita,
@@ -115,35 +117,35 @@ const Estudiante = () => {
             $LEstudiante = JSON.parse(respuesta)
             $Estudiante = $LEstudiante.Estudiante.Resultado;
             let Contador = 1;
-            console.log($Estudiante);
             $Estudiante.forEach($sel => {
                 if ($sel.Domicilio === null) {
-                    $sel.Domicilio= 'No establecido';
+                    $sel.Domicilio = 'No establecido';
                 }
                 var Modulo =
-                '<div class="Alumno col ">'+
-                '<div class="row foto">'+
-                '<img class="Alumnos" src="/Estudiante/'+$sel.Foto+'">'+
-                '</div>'+
-                '<div class="row">'+
-                '<div class="NomAlu col-11">'+
-                '<p> '+$sel.Nombre +' '+ $sel.Apellido+'</p>'+
-                '</div>'+
-                '<div class="NumAlu col-1">'+
-                '<p>'+ Contador +'</p>'+
-                '</div>'+
-                '<div class="CedulaAlu col-12">'+
-                '<p> '+$sel.CI +' </p>'+
-                '</div>'+
-                '<div class="DirecAlu col-12">'+
-                '<p> '+ $sel.Domicilio+'</p>'+
-                '</div>'+
-                '</div>'+   
-                '</div>'
+                    '<div class="Alumno1 col ">' +
+                    '<div class="row foto">' +
+                    '<img class="Alumnos" src="/Amari   /Estudiante/' + $sel.Foto + '">' +
+                    '</div>' +
+                    '<div class="row">' +
+                    '<div class="NomAlu col-11">' +
+                    '<p> ' + $sel.Nombre + ' ' + $sel.Apellido + '</p>' +
+                    '</div>' +
+                    '<div class="NumAlu col-1">' +
+                    '<p>' + Contador + '</p>' +
+                    '</div>' +
+                    '<div class="CedulaAlu col-12">' +
+                    '<p> ' + $sel.CI + ' </p>' +
+                    '</div>' +
+                    '<div class="DirecAlu col-12">' +
+                    '<p> ' + $sel.Domicilio + '</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
 
                 $('#Content').append(Modulo)
                 Contador = Contador + 1;
             });
+            localStorage.setItem("LEstudiante", JSON.stringify($Estudiante));
         },
         error(jqXHR, textStatus, errorThrown) {
             Swal.fire({
@@ -226,7 +228,214 @@ const Navbar = (id) => {
             Libretas();
         } else if (id === "Estudiante") {
             Estudiante();
+        } else if (id === "Calificacion") {
+            Calificacion();
         }
     }
+}
+const Calificacion = () => {
+    $("#Content").empty();
+    $Estudiante = JSON.parse(localStorage.getItem("LEstudiante"));
+    let Contador = 1;
+    let Calificacion =
+        '<div class=" row">' +
+        '<div class="col-8" id="Calificacion1">' +
+        '</div>' +
+        '<div class="Alumno col-4" id="Persona1">' +
+        '<div class="row foto">' +
+        '<img class="Alumnos" src="/Amari/Estudiante/incognito">' +
+        '</div>' +
+        '<div class="row">' +
+        '<div class="NomAlu col-11">' +
+        '<p></p>' +
+        '</div>' +
+        '<div class="NumAlu col-1">' +
+        '<p></p>' +
+        '</div>' +
+        '<div class="CedulaAlu col-12">' +
+        '<p></p>' +
+        '</div>' +
+        '<div class="DirecAlu col-12">' +
+        '<p></p>' +
+        '</div>' +
+        '</div>'
+    '</div>'
+    $('#Content').append(Calificacion)
+    $Estudiante.forEach($sel => {
+        var Modulo =
+            '<div class="Calificaciones row">' +
+            '<div class="numeroAlu col-2">' +
+            '<p class="NLista">Nº Lista</p>' +
+            '<div class="numAlu">' +
+            '<p class="numLista"> ' + Contador + ' </p> ' +
+            '</div>' +
+            '</div>' +
+            '<div class="TipoCali">' +
+            '<p class="TipoC">Tipo</p>' +
+            '<div class="SelecTipo col-12">' +
+            '<form action="#" id="tamano ' + Contador + '">' +
+            '<select name="tipos" id="' + $sel.CI + '">' +
+            '<option value="Tipo">Tipo</option>' +
+            '<option value="LT">T. de Lab.</option>' +
+            '<option value="O">Oral</option>' +
+            '<option value="TD">TD</option>' +
+            '<option value="TE">T. Escrito</option>' +
+            '<option value="TI">T. Investigacion</option>' +
+            '<option value="TP">T. Practica</option>' +
+            '</select>' +
+            '</form>' +
+            '</div>' +
+            '</div>' +
+            '<div class="Calif">' +
+            '<p class="nota"> Nota </p>' +
+            '<div class="numnota possition-ralative" id="Nota">' +
+            '<input type="number" class="calif" name="note" id="' + $sel.CI + '">' +
+            '</div>' +
+            '</div>' +
+            '<div class="descripcion">' +
+            '<div class="button -blue centrar">' +
+            '<p>' +
+            'Descripcion' +
+            '</p>' +
+            '</div>' +
+            '</div>' +
+            '<div class="descripcion1">' +
+            '<div class="button -blue centrar" id="' + $sel.CI + '">' +
+            '<p>' +
+            'Guardar' +
+            '</p>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+        $("#Calificacion1").append(Modulo);
+        Contador = Contador + 1;
+    });
+    $(".Calificaciones").mouseenter(function () {
+        $Estudiante = JSON.parse(localStorage.getItem("LEstudiante"));
+        const numero = $(this).text().split(" ");
+        $(".Alumnos").empty();
+        $(".Alumnos").attr("src", ' /Amari/Estudiante/' + $Estudiante[numero[2] - 1].Foto);
+        $(".NomAlu p").empty();
+        $(".NomAlu p").append($Estudiante[numero[2] - 1].Nombre + ' ' + $Estudiante[numero[2] - 1].Apellido);
+        $(".NumAlu p").empty();
+        $(".NumAlu p").append(numero[2] - 1);
+        $(".CedulaAlu p").empty();
+        $(".CedulaAlu p").append($Estudiante[numero[2] - 1].CI);
+        $(".DirecAlu p").empty();
+        $(".DirecAlu p").append($Estudiante[numero[2] - 1].Domicilio);
+    });
+    var Descripcion;
+    $(".descripcion .button").on('click', function () {
+        Swal.fire({
+            title: 'Ingrese la Cedula',
+            background: '#f1f1f1',
+            backdrop: 'true',
+            allowOutsideClick: 'false',
+            allowEnterKey: 'false',
+            showDenyButton: 'true',
+            confirmButtonText: 'Confirmar',
+            denyButtonText: 'Cancelar',
+            confirmButtonColor: '#13af01',
+            denyButtonColor: '#b91d1d',
+            html:
+                '<div class="Swal group mx-auto">' +
+                '<input type="text" id="Descripcion" class="input" required>' +
+                '<span class="highlight"></span>' +
+                '<span class="bar"></span>' +
+                '<label>Descripción</label>' +
+                '</div>'
+        }).then((result) => {
+            if ($('#Descripcion').val() !== "") {
+                Descripcion = $('#Descripcion').val();
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'El bloque de texto se a quedado vacio',
+                    confirmButtonText: 'Entendido',
+                    timer: '2000',
+                    background: '#f1f1f1',
+                    backdrop: 'true',
+                    allowOutsideClick: 'false',
+                    allowEnterKey: 'false'
+                });
+            }
+        });
+    });
+    $(".descripcion1 .button").on('click', function () {
+        $Estudiante = JSON.parse(localStorage.getItem("LEstudiante"));
+        $Libretita = JSON.parse(localStorage.getItem("LibretaSel"));
+        if ($('select#' + $(this).attr("id")).val() !== "Tipo" && $('input#' + $(this).attr("id")).val() !== "") {
+            let tipo = $('select#' + $(this).attr("id")).val();
+            let nota = $('input#' + $(this).attr("id")).val();
+            let CI = $(this).attr("id");
+            console.log('input#' + $(this).attr("id"));
+            console.log($('input#' + $(this).attr("id")).val());
+            if (Descripcion === null) {
+                $.ajax({
+                    url: '/Amari/view/Libreta/Calificacion.php',
+                    type: 'POST',
+                    data: {
+                        Estudiante: CI,
+                        Libreta: $Libretita,
+                        Descripcion: '',
+                        Nota:nota,
+                        Tipo:tipo,
+                        beforeSend: function () {
+                            console.log('Calificacion')
+                        }
+                    },
+                    success(respuesta) {
+                        console.log('F');
+                    },
+                    error(jqXHR, textStatus, errorThrown) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'No se Pudo conectar con el servidor',
+                            text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                            confirmButtonText: 'Entendido',
+                            timer: '2000',
+                            background: '#f1f1f1',
+                            backdrop: 'true',
+                            allowOutsideClick: 'false',
+                            allowEnterKey: 'false',
+                        });
+                    }
 
+                });
+            } else {
+                $.ajax({
+                    url: '/Amari/view/Libreta/Calificacion.php',
+                    type: 'POST',
+                    data: {
+                        Estudiante: CI,
+                        Libreta: $Libretita,
+                        Descripcion: Descripcion,
+                        Nota:nota,
+                        Tipo:tipo,
+                        beforeSend: function () {
+                            console.log('Calificacion')
+                        }
+                    },
+                    success(respuesta) {
+                        console.log(F);
+                    },
+                    error(jqXHR, textStatus, errorThrown) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'No se Pudo conectar con el servidor',
+                            text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
+                            confirmButtonText: 'Entendido',
+                            timer: '2000',
+                            background: '#f1f1f1',
+                            backdrop: 'true',
+                            allowOutsideClick: 'false',
+                            allowEnterKey: 'false',
+                        });
+                    }
+
+                });
+            }
+        }
+
+    });
 }

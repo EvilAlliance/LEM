@@ -3,7 +3,7 @@
 echo '
   <div class="d-none d-md-flex w-100 row ceropad ceromar barra">
   <div class="col" id="barra">
-  <img class="logo" src="/view/Template/Header/img/LEM.svg">
+  <img class="logo" src="/Amari/view/Template/Header/img/LEM.svg">
 </div>
     <div class="col-6 centrar1 dist" id="rol">
 

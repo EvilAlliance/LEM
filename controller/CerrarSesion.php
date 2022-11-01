@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Log.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Amari/model/Log.php';
 
 class controllerCerrarSesion
 {

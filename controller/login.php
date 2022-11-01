@@ -1,12 +1,12 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/login.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/model/Log.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Amari/model/login.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Amari/model/Log.php';
 
 class controllerLogin
 {
     public function Iniciar()
     {
-        require $_SERVER['DOCUMENT_ROOT'] . '/view/login/assets/index.php';
+        require $_SERVER['DOCUMENT_ROOT'].'/Amari/view/login/assets/index.php';
     }
 
     public function IniciarSesion($CI, $pass)
@@ -84,7 +84,7 @@ class controllerLogin
     public function Pestana($Pestana)
     {
         if ($Pestana==='Docente'){
-            return '/view/Libreta/assets/index.php';
+            return '/Amari/view/Libreta/assets/index.php';
         }
     }
 }
