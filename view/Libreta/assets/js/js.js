@@ -219,6 +219,7 @@ const Navbar = (id) => {
         }
     ];
     if (!($("#" + id).hasClass("inactive"))) {
+        $("#Content").removeClass('overhidden');
         IDs.forEach(function (sel) {
             $("#" + sel.id + " a div img").attr('src', $("#" + sel.id + " a div img").attr('src').replace(sel.lleno, sel.vacio));
             if (sel.id === id) {
@@ -241,7 +242,7 @@ const Navbar = (id) => {
                     $("#Clase div.submodule").fadeOut('slow').hide();
                 }
             }
-        }else {
+        } else {
             $("#Grupo div.submodule").fadeOut('slow').hide();
             $("#Clase div.submodule").fadeOut('slow').hide();
         }
@@ -256,11 +257,12 @@ const Navbar = (id) => {
 }
 const Calificacion = () => {
     $("#Content").empty();
+    $("#Content").removeClass('scroll-box');
     $Estudiante = JSON.parse(localStorage.getItem("LEstudiante"));
     let Contador = 1;
     let Calificacion =
-        '<div class=" row">' +
-        '<div class="col-8" id="Calificacion1">' +
+        '<div class="row">' +
+        '<div class="col-8 scroll-box overflowy" id="Calificacion1">' +
         '</div>' +
         '<div class="Alumno col-4" id="Persona1">' +
         '<div class="row foto">' +
@@ -285,17 +287,17 @@ const Calificacion = () => {
     $Estudiante.forEach($sel => {
         var Modulo =
             '<div class="Calificaciones row">' +
-            '<div class="numeroAlu col-2">' +
+            '<div class="numeroAlu col-2 ceropad">' +
             '<p class="NLista">Nº Lista</p>' +
             '<div class="numAlu">' +
             '<p class="numLista"> ' + Contador + ' </p> ' +
             '</div>' +
             '</div>' +
-            '<div class="TipoCali">' +
+            '<div class="TipoCali col-2 ceropad">' +
             '<p class="TipoC">Tipo</p>' +
-            '<div class="SelecTipo col-12">' +
-            '<form action="#" id="tamano ' + Contador + '">' +
-            '<select name="tipos" id="' + $sel.CI + '">' +
+            '<div class="SelecTipo col-12 centrar1">' +
+            '<form action="#" id="' + Contador + '" class="tamano centar1">' +
+            '<select name="tipos" id="' + $sel.CI + '" class="widthcien">' +
             '<option value="Tipo">Tipo</option>' +
             '<option value="LT">T. de Lab.</option>' +
             '<option value="O">Oral</option>' +
@@ -307,20 +309,20 @@ const Calificacion = () => {
             '</form>' +
             '</div>' +
             '</div>' +
-            '<div class="Calif">' +
+            '<div class="Calif col-2 ceropad">' +
             '<p class="nota"> Nota </p>' +
-            '<div class="numnota possition-ralative" id="Nota">' +
+            '<div class="numnota" id="Nota">' +
             '<input type="number" class="calif" name="note" id="' + $sel.CI + '">' +
             '</div>' +
             '</div>' +
-            '<div class="descripcion">' +
-            '<div class="button -blue centrar">' +
+            '<div class="descripcion col-3">' +
+            '<div class="button -blue centrar" id="' + $sel.CI + '">' +
             '<p>' +
             'Descripcion' +
             '</p>' +
             '</div>' +
             '</div>' +
-            '<div class="descripcion1">' +
+            '<div class="descripcion1 col-3">' +
             '<div class="button -blue centrar" id="' + $sel.CI + '">' +
             '<p>' +
             'Guardar' +
@@ -331,6 +333,7 @@ const Calificacion = () => {
         $("#Calificacion1").append(Modulo);
         Contador = Contador + 1;
     });
+    var Descripcion = [null, null];
     $(".Calificaciones").mouseenter(function () {
         $Estudiante = JSON.parse(localStorage.getItem("LEstudiante"));
         const numero = $(this).text().split(" ");
@@ -345,7 +348,6 @@ const Calificacion = () => {
         $(".DirecAlu p").empty();
         $(".DirecAlu p").append($Estudiante[numero[2] - 1].Domicilio);
     });
-    var Descripcion;
     $(".descripcion .button").on('click', function () {
         Swal.fire({
             title: 'Ingrese la Cedula',
@@ -367,7 +369,7 @@ const Calificacion = () => {
                 '</div>'
         }).then((result) => {
             if ($('#Descripcion').val() !== "") {
-                Descripcion = $('#Descripcion').val();
+                Descripcion = [$('#Descripcion').val(), $(this).attr("id")];
             } else {
                 Swal.fire({
                     icon: 'warning',
@@ -385,13 +387,17 @@ const Calificacion = () => {
     $(".descripcion1 .button").on('click', function () {
         $Estudiante = JSON.parse(localStorage.getItem("LEstudiante"));
         $Libretita = JSON.parse(localStorage.getItem("LibretaSel"));
-        if ($('select#' + $(this).attr("id")).val() !== "Tipo" && $('input#' + $(this).attr("id")).val() !== "") {
+        if (parseInt($("input#" + $(this).attr("id") + ".calif").val()) <= 12 && $('select#' + $(this).attr("id")).val() !== "Tipo" && $("input#" + $(this).attr("id") + ".calif").val() !== "") {
+            $('select#' + $(this).attr("id")).css('border-color', '#0014A7');
+            $("input#" + $(this).attr("id") + ".calif").css('border-color', '#0014A7');
             let tipo = $('select#' + $(this).attr("id")).val();
-            let nota = $('input#' + $(this).attr("id")).val();
+            let nota = $("input#" + $(this).attr("id") + ".calif").val();
             let CI = $(this).attr("id");
-            console.log('input#' + $(this).attr("id"));
-            console.log($('input#' + $(this).attr("id")).val());
-            if (Descripcion === null) {
+            if (!(Descripcion[1] === $(this).attr("id"))) {
+                Descripcion[1] = null;
+                Descripcion[0] = null;
+            }
+            if (Descripcion[0] === null) {
                 $.ajax({
                     url: '/Amari/view/Libreta/Calificacion.php',
                     type: 'POST',
@@ -402,11 +408,11 @@ const Calificacion = () => {
                         Nota: nota,
                         Tipo: tipo,
                         beforeSend: function () {
-                            console.log('Calificacion')
+                            console.log('Calificacion sin descripcion')
                         }
                     },
                     success(respuesta) {
-                        console.log('F');
+                        console.log("F");
                     },
                     error(jqXHR, textStatus, errorThrown) {
                         Swal.fire({
@@ -430,15 +436,15 @@ const Calificacion = () => {
                     data: {
                         Estudiante: CI,
                         Libreta: $Libretita,
-                        Descripcion: Descripcion,
+                        Descripcion: Descripcion[0],
                         Nota: nota,
                         Tipo: tipo,
                         beforeSend: function () {
-                            console.log('Calificacion')
+                            console.log('Calificacion con descripcion')
                         }
                     },
                     success(respuesta) {
-                        console.log(F);
+                        console.log("F");
                     },
                     error(jqXHR, textStatus, errorThrown) {
                         Swal.fire({
@@ -456,7 +462,17 @@ const Calificacion = () => {
 
                 });
             }
+        } else {
+            if ($('select#' + $(this).attr("id")).val() === "Tipo") {
+                $('select#' + $(this).attr("id")).css('border-color', 'red');
+            }else{
+                $('select#' + $(this).attr("id")).css('border-color', '#0014A7');
+            }
+            if ($("input#" + $(this).attr("id") + ".calif").val() === "" || $("input#" + $(this).attr("id") + ".calif").val() >= 12) {
+                $("input#" + $(this).attr("id") + ".calif").css('border-color', 'red');
+            }else{
+                $("input#" + $(this).attr("id") + ".calif").css('border-color', '#0014A7');
+            }
         }
-
     });
 }

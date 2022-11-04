@@ -163,7 +163,7 @@ body {
     opacity: 40%;
 }
 
-.distancia{
+.distancia {
     margin-top: 8px;
 }
 
@@ -318,23 +318,17 @@ body {
 
 .Calificaciones {
     position: relative;
-    max-width: 1000px;
-    min-width: 1000px;
-    max-height: 100px;
     min-height: 100px;
     background-color: white;
     border: 2px #0014A7 solid;
     border-radius: 10px 0px 10px 0px;
     box-shadow: 0px 1px 0.9em #0013a77f;
     margin: 40px;
-    top: 20px
 }
 
 .numeroAlu {
     position: relative;
     background-color: white;
-    max-width: 100px;
-    min-width: 100px;
     max-height: 96px;
     min-height: 96px;
     border-right: 2px solid #0014A7;
@@ -351,12 +345,9 @@ body {
 .numAlu {
     position: relative;
     background-color: white;
-    max-width: 98px;
-    min-width: 98px;
     max-height: 50px;
     min-height: 50px;
     border-top: 2px solid #0014A7;
-    left: -12px;
     text-align: center;
     padding-top: 5px;
     font-size: 26px;
@@ -365,8 +356,6 @@ body {
 .TipoCali {
     position: relative;
     background-color: white;
-    max-width: 160px;
-    min-width: 169px;
     max-height: 96px;
     min-height: 96px;
     border-right: 2px solid #0014A7;
@@ -381,12 +370,8 @@ body {
 }
 
 .SelecTipo {
-    position: relative;
     border-top: 2px solid #0014A7;
     margin-top: 0px;
-    max-width: 169px;
-    min-width: 169px;
-    left: -12px
 }
 
 
@@ -396,24 +381,19 @@ select {
 }
 
 .tamano {
-    max-width: 135px;
-    min-width: 135px;
+    width: 80%;
 }
 
 select {
     text-align: center;
     position: relative;
-    left: 10px;
     background-color: #d1e8ff;
     border: 2px solid #0014A7;
     border-radius: 5px 5px 0px 0px;
 }
 
 .Calif {
-    position: relative;
     background-color: white;
-    max-width: 100px;
-    min-width: 100px;
     max-height: 96px;
     min-height: 96px;
     border-right: 2px solid #0014A7;
@@ -428,14 +408,10 @@ select {
 }
 
 .numnota {
-    position: relative;
     background-color: white;
-    max-width: 98px;
-    min-width: 98px;
     max-height: 50px;
     min-height: 50px;
     border-top: 2px solid #0014A7;
-    left: -12px;
     text-align: center;
     padding-top: 5px;
     font-size: 26px;
@@ -443,8 +419,6 @@ select {
 
 .calif {
     position: relative;
-    max-width: 50px;
-    min-width: 50px;
     max-height: 40px;
     min-height: 40px;
     background-color: #d1e8ff;
@@ -453,12 +427,12 @@ select {
     font-size: 22px;
     color: #000000;
     text-align: center;
+    width: 80%;
 }
 
 .descripcion {
     position: relative;
     background-color: white;
-    max-width: 250px;
     max-height: 96px;
     min-height: 96px;
     margin-top: 0px;
@@ -468,16 +442,11 @@ select {
 .descripcion1 {
     position: relative;
     background-color: white;
-    max-width: 350px;
     max-height: 96px;
     min-height: 96px;
     margin-top: 0px;
-}
+    border-radius: 0px 0px 10px 0px;
 
-input[type=number] {
-    -webkit-user-select: textfield;
-    -ms-user-select: textfield;
-    user-select: textfield;
 }
 
 #Ingresar .group {

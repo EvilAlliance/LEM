@@ -8,7 +8,7 @@ class controllerCerrarSesion
         session_unset();
         session_destroy();
         $modelLog = new Log();
-        $modelLog->Registro($CI, $Descripcion, $Seccion);
+        $modelLog->Registro($CI, $Seccion, $Descripcion);
     }
 
     public function CerrarSesionsinLog()

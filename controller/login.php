@@ -15,9 +15,6 @@ class controllerLogin
         if ($CI !== null && $pass !== null) {
             $model = new modelLogin();
             $Peticion->Existe = $model->existeCuenta($CI, $pass);
-            if ($Peticion->Existe->Resultado == "Existe Cuenta") {
-                $modelLog = new Log();
-            }
             return  $Peticion;
             mysqli_close($this->conexion);
         } else {
@@ -81,8 +78,10 @@ class controllerLogin
         return $Peticion;
     }
 
-    public function Pestana($Pestana)
+    public function Pestana($Pestana, $Seccion, $CI, $Descripcion)
     {
+        $modelLog = new Log();
+        $modelLog->Registro($CI, $Seccion, $Descripcion);
         if ($Pestana==='Docente'){
             return '/Amari/view/Libreta/assets/index.php';
         }
