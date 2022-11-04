@@ -542,7 +542,6 @@ const Inicio = () => {
                             },
                             success(respuesta) {
                                 window.location.href = respuesta;
-                                localStorage.setItem('Verificacion', false);
                             }
                         });
                     }

@@ -8,6 +8,7 @@ if ($_POST['CI'] !== null) {
     if (json_encode($resultado->Existe->Resultado) === '"Error Usuario"') {
         $CerrarSesion = new controllerCerrarSesion;
         $CerrarSesion->CerrarSesionsinLog();
+        $resultado->CerrarSesion = "Cerro Session";
     }
     echo json_encode($resultado);
 } else {

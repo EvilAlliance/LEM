@@ -1,3 +1,15 @@
+<?php
+session_start();
+$_SESSION['Seccion'] = 'Login';
+if (isset($_SESSION['CI']) && isset($_SESSION['Rol']) && isset($_SESSION['pass'])) {
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/Amari/controller/CerrarSesion.php';
+  header('location: /Amari/view/Libreta/assets/index.php');
+  if ($Pestana === 'Docente') {
+    header('location: /Amari/view/Libreta/assets/index.php');
+  }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -17,9 +29,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 overhidden">
   <?php
-  require_once $_SERVER['DOCUMENT_ROOT'].'/Amari/view/Template/Header/index.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/Amari/view/Template/Header/index.php';
   ?>
   <div class="row position-relative w-100 dentro ceromar scroll-box">
     <div class="login col centrar ceropad">
@@ -101,7 +113,7 @@
     </div>
   </div>
   <?php
-  require_once $_SERVER['DOCUMENT_ROOT'].'/Amari/view/Template/Footer/index.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/Amari/view/Template/Footer/index.php';
   ?>
   <script type="text/javascript" src="/Amari/view/login/assets/js/Librerias/package/dist/sweetalert2.all.min.js"></script>
   <script type="text/javascript" src="/Amari/view/login/assets/js/Librerias/luxon.js"></script>

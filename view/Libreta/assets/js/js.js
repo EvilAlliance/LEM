@@ -1,23 +1,14 @@
 $(window).on('load', function () {
     document.title = "Libreta";
     Libretas();
-    /*if (localStorage.getItem('Login') !== 'true') {
-                            localStorage.setItem('Login', true);
-                        localStorage.setItem('Libreta', false);
-                        $.ajax({
-                            url: '/Amari/view/login/Sesion.php',
-                        type: 'GET',
-                        success(respuesta) {
-                            window.location.href = respuesta;
-            }
-        });
-    }*/
+    $("#Grupo div.submodule").hide();
+    $("#Clase div.submodule").hide();
 });
 $(document).ready(function () {
     $(".module").tooltip({
         track: true,
     });
-    $(".module").tooltip();
+    $("#navbar").menu();
 })
 
 window.addEventListener("visibilitychange", () => {
@@ -29,7 +20,7 @@ window.addEventListener("visibilitychange", () => {
 });
 
 const Libretas = () => {
-    $(".module").addClass("inactive");
+    $(".distancia").addClass("inactive");
     $("#Libretas").removeClass("inactive");
     $("#Content").empty();
     $("#Libretas a div img").attr('src', $("#Libretas a div img").attr('src').replace('folder.png', 'folder (1).png'));
@@ -45,7 +36,7 @@ const Libretas = () => {
             let Contador = 0;
             $Libreta1.forEach($sel => {
                 var Modulo =
-                    '<div class=" libreta col-4" id="' + Contador + '">' +
+                    '<div class=" libreta col-12 col-md-4" id="' + Contador + '">' +
                     '<div class="marginleft3 titulo fs-3">' +
                     $sel.Curso + ' ' + $sel.Grado + '° ' + $sel.Orientacion +
                     '</div>' +
@@ -77,7 +68,7 @@ const Libretas = () => {
             });
             $(".seleccionar").on('click', function () {
                 localStorage.setItem("LibretaSel", JSON.stringify($Libreta1[$(this).attr('id')]));
-                $(".module").toggleClass("inactive");
+                $(".distancia").toggleClass("inactive");
                 $("#Libretas").toggleClass("inactive");
                 Estudiante();
             });
@@ -100,8 +91,8 @@ const Libretas = () => {
 }
 
 const Estudiante = () => {
-    $(".module#Libretas a div img").attr('src', $(".module#Libretas a div img").attr('src').replace('folder (1).png', 'folder.png'));
-    $(".module#Estudiante a div img").attr('src', $(".module#Estudiante a div img").attr('src').replace('Customer.png', 'Customer (1).png'));
+    $(".row#Libretas a div.module img").attr('src', $(".row#Libretas a div.module img").attr('src').replace('folder (1).png', 'folder.png'));
+    $(".row#Estudiante a div.module img").attr('src', $(".row#Estudiante a div.module img").attr('src').replace('Customer.png', 'Customer (1).png'));
     $("#Content").empty();
     $Libretita = JSON.parse(localStorage.getItem("LibretaSel"));
     $.ajax({
@@ -172,6 +163,16 @@ const Navbar = (id) => {
             id: "Libretas"
         },
         {
+            vacio: "notas.png",
+            lleno: "notas (1).png",
+            id: "Libretas"
+        },
+        {
+            vacio: "planificacion.png",
+            lleno: "planificacion (1).png",
+            id: "Libretas"
+        },
+        {
             vacio: "Customer.png",
             lleno: "Customer (1).png",
             id: "Estudiante"
@@ -219,11 +220,31 @@ const Navbar = (id) => {
     ];
     if (!($("#" + id).hasClass("inactive"))) {
         IDs.forEach(function (sel) {
-            $("#" + sel.id + " a div img").attr('src', $(".module#" + sel.id + " a div img").attr('src').replace(sel.lleno, sel.vacio));
+            $("#" + sel.id + " a div img").attr('src', $("#" + sel.id + " a div img").attr('src').replace(sel.lleno, sel.vacio));
             if (sel.id === id) {
-                $("#" + id + " a div img").attr('src', $(".module#" + id + " a div img").attr('src').replace(sel.vacio, sel.lleno));
+                $("#" + id + " a div img").attr('src', $("#" + id + " a div img").attr('src').replace(sel.vacio, sel.lleno));
             }
         });
+        if (id === "Grupo" || id === "Clase") {
+            if ($("#" + id + " div a div.submodule").css("display") === 'none') {
+                console.log("abrir");
+                if (id === "Grupo") {
+                    $("#Grupo div.submodule").show().fadeIn('slow');
+                } else if (id === "Clase") {
+                    $("#Clase div.submodule").show().fadeIn('slow');
+                }
+            } else {
+                console.log("cerrar");
+                if (id === "Grupo") {
+                    $("#Grupo div.submodule").fadeOut('slow').hide();
+                } else if (id === "Clase") {
+                    $("#Clase div.submodule").fadeOut('slow').hide();
+                }
+            }
+        }else {
+            $("#Grupo div.submodule").fadeOut('slow').hide();
+            $("#Clase div.submodule").fadeOut('slow').hide();
+        }
         if (id === "Libretas") {
             Libretas();
         } else if (id === "Estudiante") {
@@ -378,8 +399,8 @@ const Calificacion = () => {
                         Estudiante: CI,
                         Libreta: $Libretita,
                         Descripcion: '',
-                        Nota:nota,
-                        Tipo:tipo,
+                        Nota: nota,
+                        Tipo: tipo,
                         beforeSend: function () {
                             console.log('Calificacion')
                         }
@@ -410,8 +431,8 @@ const Calificacion = () => {
                         Estudiante: CI,
                         Libreta: $Libretita,
                         Descripcion: Descripcion,
-                        Nota:nota,
-                        Tipo:tipo,
+                        Nota: nota,
+                        Tipo: tipo,
                         beforeSend: function () {
                             console.log('Calificacion')
                         }

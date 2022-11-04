@@ -8,6 +8,7 @@ if ($_SESSION['CI'] !== null) {
     if (json_encode($resultado->Seguridad->Resultado) === '"Error Peticion Seguridad"' || json_encode($resultado->Seguridad->Resultado) ==='"Error en Base de Datos"' || count($resultado->Seguridad->Resultado) < 2) {
         $CerrarSesion = new controllerCerrarSesion;
         $CerrarSesion->CerrarSesionsinLog();
+        $resultado->CerrarSesion = "Cerro Session";
     }
     echo json_encode($resultado);
 }

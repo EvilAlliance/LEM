@@ -10,6 +10,7 @@ if ($_SESSION['pass'] !== null &&  $_SESSION['CI'] !== null) {
     if (json_encode($resultado->Existe->Resultado) === '"Error Cuenta"' || json_encode($resultado->Existe->Resultado) ==='"Error Peticion Cuenta"' || json_encode($resultado->Existe->Resultado) ==='"Error en Base de Datos"') {
         $CerrarSesion = new controllerCerrarSesion;
         $CerrarSesion->CerrarSesionsinLog();
+        $resultado->CerrarSesion = "Cerro Session";
     }
     echo json_encode($resultado);
 } else {
