@@ -8,7 +8,7 @@ $(window).on('load', function () {
         success(respuesta) {
             if (!(respuesta === 'No debe')) {
                 $Rol = JSON.parse(respuesta);
-                var modulo =
+               /* var modulo =
                     '<div class="dropdown" id="drop">'+
                 '<input id="toggle2" type="checkbox">'+
                 ' <label for="toggle2" class="animate ">Roles<i class="fa fa-list float-right"></i></label>'+
@@ -22,7 +22,7 @@ $(window).on('load', function () {
                         ' <li class="animate" id="' + $sel.Rol.replace(" ", "") + '">' + $sel.Rol + '<i class="fa fa-code float-right"></i></li>';
                     $("#menuRol").append(group);
                     $sel.Rol = $sel.Rol.replace(" ", "");
-                });
+                });*/
             }
         },
         error(jqXHR, textStatus, errorThrown) {

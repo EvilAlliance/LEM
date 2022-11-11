@@ -82,6 +82,7 @@ class controllerLogin
     {
         $modelLog = new Log();
         $modelLog->Registro($CI, $Seccion, $Descripcion);
+        
         if ($Pestana==='Docente'){
             return '/Amari/view/Libreta/assets/index.php';
         }

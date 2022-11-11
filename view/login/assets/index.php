@@ -119,6 +119,7 @@ if (isset($_SESSION['CI']) && isset($_SESSION['Rol']) && isset($_SESSION['pass']
   <script type="text/javascript" src="/Amari/view/login/assets/js/Librerias/luxon.js"></script>
   <script type="text/javascript" src="/Amari/view/login/assets/js/Librerias/moment.js"></script>
   <script type="text/javascript" src="/Amari/view/login/assets/js/Librerias/Jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/Amari/view/login/assets/js/Librerias/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="/Amari/view/login/assets/js/Librerias/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
   <script type="text/javascript" src="/Amari/view/login/assets/js/js.js"></script>
   <script type="text/javascript" src="/Amari/view/Template/Footer/js/js.js"></script>
