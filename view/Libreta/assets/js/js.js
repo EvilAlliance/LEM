@@ -894,6 +894,11 @@ const Calificacion = () => {
 }
 
 const listaCalificacion = (CI, meses, Libretita, Periodo) => {
+    $(".dropdown-menu li a").unbind();
+    $(".Promedio").unbind();
+    $(".ModEl").unbind();
+    $("div.SelecTipo, div.Calificaciones.row").unbind();
+    $(".Guardar").unbind();
     $.ajax({
         url: '/Amari/view/Libreta/GetCalificacion.php',
         type: 'POST',
