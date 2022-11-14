@@ -942,7 +942,6 @@ const listaCalificacion = (CI, meses, Libretita, Periodo) => {
                     if ($sel.Tipo !== "P") {
                         $datos = $sel.Fecha.split('-');
                         if ($datos[1] >= meses[0] && $datos[1] <= meses[1] || $datos[1] === meses[0]) {
-                            console.log("afsdfa");
                             $sel.Fecha = $datos[2] + "/" + $datos[1] + "/" + $datos[0];
                             var Modulo =
                                 '<div class="Calificaciones row" id="' + (Contador) + '">' +
