@@ -50,7 +50,7 @@ $(document).ready(function () {
                 console.log("Get Rol");
             },
             success(respuesta) {
-                window.location.href = '/Amari/Index.php';
+                window.location.href = '/Amari/index.php';
             },
             error(jqXHR, textStatus, errorThrown) {
                 Swal.fire({

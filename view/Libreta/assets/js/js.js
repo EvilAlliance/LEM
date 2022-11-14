@@ -924,10 +924,10 @@ const listaCalificacion = (CI, meses, Libretita, Periodo) => {
                         '<div class="dropdown Periodo" CI="' + CI + '">' +
                         '<button class="btn btn-light dropdown-toggle widthcien" type="button" data-bs-toggle="dropdown" aria-expanded="false">Periodo <span class="caret" id="1 12"></span></button>' +
                         '<ul class="dropdown-menu">' +
-                        '<li><a class="dropdown-item text-center" value="Primera Reunion" id="3 4">Primera Reunion</a></li>' +
-                        '<li><a class="dropdown-item text-center" value="Mayo" id="5">Mayo</a></li>' +
-                        '<li><a class="dropdown-item text-center" value="Segunda Reunion" id="6 7">Segunda Reunion</a></li>' +
-                        '<li><a class="dropdown-item text-center" value="Agosto y Setiempre" id="8 9">Agosto y Setiempre</a></li>' +
+                        '<li><a class="dropdown-item text-center" value="Primera Reunion" id="03 04">Primera Reunion</a></li>' +
+                        '<li><a class="dropdown-item text-center" value="Mayo" id="05">Mayo</a></li>' +
+                        '<li><a class="dropdown-item text-center" value="Segunda Reunion" id="06 07">Segunda Reunion</a></li>' +
+                        '<li><a class="dropdown-item text-center" value="Agosto y Setiempre" id="08 09">Agosto y Setiempre</a></li>' +
                         '<li><a class="dropdown-item text-center" value="Tercera Reunion" id="10 12">Tercera Reunion</a></li>' +
                         '</ul>' +
                         '</div>' +
@@ -942,6 +942,7 @@ const listaCalificacion = (CI, meses, Libretita, Periodo) => {
                     if ($sel.Tipo !== "P") {
                         $datos = $sel.Fecha.split('-');
                         if ($datos[1] >= meses[0] && $datos[1] <= meses[1] || $datos[1] === meses[0]) {
+                            console.log("afsdfa");
                             $sel.Fecha = $datos[2] + "/" + $datos[1] + "/" + $datos[0];
                             var Modulo =
                                 '<div class="Calificaciones row" id="' + (Contador) + '">' +

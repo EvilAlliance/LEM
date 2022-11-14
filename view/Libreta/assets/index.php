@@ -134,7 +134,7 @@ if (!(isset($_SESSION['CI']) && isset($_SESSION['Rol']) && isset($_SESSION['pass
     <script type="text/javascript" src="/Amari/view/Libreta/assets/js/Librerias/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="/Amari/view/Libreta/assets/js/Librerias/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/Amari/view/Libreta/assets/js/js.js"></script>
-    <script type="text/javascript" src="/Amari/view/Libreta/assets/js/Control.js"></script>
+    <script type="text/javascript" src="/Amari/view/Libreta/assets/js/control.js"></script>
     <script type="text/javascript" src="/Amari/view/Template/Footer/js/js.js"></script>
     <script type="text/javascript" src="/Amari/view/Template/Header/js/js.js"></script>
 </body>
