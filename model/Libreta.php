@@ -501,4 +501,147 @@ class modelLibreta
             return $Devolver;
         }
     }
+
+    public function GetClase($Libretita, $Fecha)
+    {
+        $Devolver = new stdClass();
+        $query = "SELECT Clase.ID, Atiende.Asiste, Atiende.CI, Clase.Modulo, Clase.Estado AS Estado, De.Estado AS Estado1 FROM Clase JOIN De ON Clase.ID = De.ID JOIN Atiende on Clase.ID = Atiende.ID WHERE Nombre='" . $Libretita["Asignatura"] . "' AND Orientacion='" . $Libretita["Orientacion"] . "' AND Curso='" . $Libretita["Curso"] . "' AND Grado='" . $Libretita["Grado"] . "' AND Grupo='" . $Libretita["Grupo"] . "' AND Turno='" . $Libretita["Turno"] . "' AND Ano=" . $Libretita["Año"] . " AND Clase.Fecha = '$Fecha' ORDER BY Atiende.CI;";
+        if ($this->conexion !== "Error") {
+            $peticion = @mysqli_query($this->conexion, $query);
+            if (!$peticion) {
+                $Devolver->Resultado = "Error Peticion Cantidad Instancia Escrito";
+                $Devolver->Modulover->Query = $query;
+                $Devolver->Error = @mysqli_error($this->conexion);
+                return $Devolver;
+            } else {
+                if ($peticion->num_rows !== 0) {
+                    while ($columna = @mysqli_fetch_assoc($peticion)) {
+                        $Clase[] = array(
+                            'ID' => $columna['ID'],
+                            'Asiste' => $columna['Asiste'],
+                            'CI' => $columna['CI'],
+                            'Modulo' => $columna['Modulo'],
+                            'Estado' => $columna['Estado'],
+                            'Estado1' => $columna['Estado1']
+                        );
+                    }
+                } else {
+                    $Clase = "Vacio";
+                }
+                $Devolver->Resultado = $Clase;
+                return $Devolver;
+            }
+        } else {
+            $Devolver->Resultado = "Error en Base de Datos";
+            return $Devolver;
+        }
+    }
+
+    public function SetClase($Libretita, $Modulo, $Fecha, $Alumno, $Estado)
+    {
+        $Devolver = new stdClass();
+        for ($i = 1; $i <= $Modulo; $i++) {
+            $jota = new stdClass();
+            $query = "INSERT INTO Clase(Modulo, Fecha) VALUE($i, '$Fecha');";
+            if ($this->conexion !== "Error") {
+                $peticion = @mysqli_query($this->conexion, $query);
+                $Clase = new stdClass();
+                if (!$peticion) {
+                    $Clase->Resultado = "Error Peticion Insert Clase";
+                    $Clase->Query = $query;
+                    $Clase->Error = @mysqli_error($this->conexion);
+                    $jota->Clase = $Clase;
+                } else {
+                    $Clase->Resultado = "Exito Peticion Insert Clase";
+                    $jota->Clase  = $Clase;
+                    $ID = @mysqli_insert_id($this->conexion);
+                    $query = "INSERT INTO De(ID, Nombre, Orientacion, Curso, Grado, Grupo, Turno, Ano, Estado) VALUE('$ID', '" . $Libretita["Asignatura"] . "', '" . $Libretita["Orientacion"] . "', '" . $Libretita["Curso"] . "', '" . $Libretita["Grado"] . "', '" . $Libretita["Grupo"] . "', '" . $Libretita["Turno"] . "', " . $Libretita["Año"] . ", '$Estado');";
+                    $peticion = @mysqli_query($this->conexion, $query);
+                    $De = new stdClass();
+                    if (!$peticion) {
+                        $De->Resultado = "Error Peticion Insert Pertenece";
+                        $De->Query = $query;
+                        $De->Error = @mysqli_error($this->conexion);
+                        $jota->De = $De;
+                    } else {
+                        $De->Resultado = "Exito Peticion Insert Pertenece";
+                        $jota->De = $De;
+                    }
+                }
+            } else {
+                $jota->Resultado = "Error en Base de Datos";
+            }
+            for ($j = 0; $j < count($Alumno); $j++) {
+                $For = new stdClass();
+                if ($this->conexion !== "Error") {
+                    $query = "INSERT INTO Atiende(ID, CI, Asiste) VALUE('$ID', '" . $Alumno[$j][0] . "', '" . $Alumno[$j][$i] . "');";
+                    $peticion = @mysqli_query($this->conexion, $query);
+                    $Atiende = new stdClass();
+                    if (!$peticion) {
+                        $Atiende->Resultado = "Error Peticion Insert Nota";
+                        $Atiende->Query = $query;
+                        $Atiende->Error = @mysqli_error($this->conexion);
+                        $For->Atiende = $Atiende;
+                    } else {
+                        $Atiende->Resultado = "Exito Peticion Insert Nota";
+                        $For->Atiende = $Atiende;
+                    }
+                } else {
+                    $For->Resultado = "Error en Base de Datos";
+                }
+                $jota->$j = $For;
+            }
+            $Devolver->$i =  $jota;
+        }
+        return $jota;
+    }
+
+    public function UpdateClase($Modulo, $Alumno, $Estado, $ID, $Libretita)
+    {
+        $Devolver = new stdClass();
+        for ($i = 1; $i <= $Modulo; $i++) {
+            $jota = new stdClass();
+            $query = "UPDATE De SET Estado='" . $Estado . "'  WHERE ID='" . $ID[($i - 1)] . "' AND Nombre='" . $Libretita["Asignatura"] . "' AND Orientacion='" . $Libretita["Orientacion"] . "' AND Curso='" . $Libretita["Curso"] . "' AND Grado='" . $Libretita["Grado"] . "' AND Grupo='" . $Libretita["Grupo"] . "' AND Turno='" . $Libretita["Turno"] . "' AND Ano=" . $Libretita["Año"] . ";";
+            if ($this->conexion !== "Error") {
+                $peticion = @mysqli_query($this->conexion, $query);
+                if ($this->conexion !== "Error") {
+                    $peticion = @mysqli_query($this->conexion, $query);
+                    $De = new stdClass();
+                    if (!$peticion) {
+                        $De->Resultado = "Error Peticion Update De";
+                        $De->Query = $query;
+                        $De->Error = @mysqli_error($this->conexion);
+                        $jota->De = $De;
+                    } else {
+                        $De->Resultado = "Exito Peticion Update De";
+                        $jota->De  = $De;
+                    }
+                } else {
+                    $jota->Resultado = "Error en Base de Datos";
+                }
+            }
+            for ($j = 0; $j < count($Alumno); $j++) {
+                $For = new stdClass();
+                if ($this->conexion !== "Error") {
+                    $query = "UPDATE Atiende SET Asiste='" . $Alumno[$j][$i] . "'  WHERE ID='" . $ID[($i - 1)] . "' AND CI='" . $Alumno[$j][0] . "';";
+                    $peticion = @mysqli_query($this->conexion, $query);
+                    $Atiende = new stdClass();
+                    if (!$peticion) {
+                        $Atiende->Resultado = "Error Peticion Update Atiende";
+                        $Atiende->Query = $query;
+                        $Atiende->Error = @mysqli_error($this->conexion);
+                        $For->Atiende = $Atiende;
+                    } else {
+                        $Atiende->Resultado = "Exito Peticion Update Atiende";
+                        $For->Atiende = $Atiende;
+                    }
+                } else {
+                    $For->Resultado = "Error en Base de Datos";
+                }
+                $jota->$j = $For;
+            }
+            $Devolver->$i =  $jota;
+        }
+        return $jota;
+    }
 }

@@ -117,4 +117,28 @@ class controllerLibreta
         $Peticion->Log = $log->Registro($CIDocente, $Seccion, "Alta de Promedio Nota: $nota al Alumno: $CI");
         return $Peticion;
     }
+
+    public function GetClase($Libretita, $Fecha)
+    {
+        $Peticion = new stdClass();
+        $model = new modelLibreta();
+        $Peticion->Clase= $model->GetClase($Libretita, $Fecha);
+        return $Peticion;
+    }
+
+    public function SetClase($Libretita, $Modulo, $Fecha, $Alumno, $Estado)
+    {
+        $Peticion = new stdClass();
+        $model = new modelLibreta();
+        $Peticion->Clase= $model->SetClase($Libretita, $Modulo, $Fecha, $Alumno, $Estado);
+        return $Peticion;
+    }
+
+    public function UpdateClase($Modulo, $Alumno, $Estado, $ID, $Libretita)
+    {
+        $Peticion = new stdClass();
+        $model = new modelLibreta();
+        $Peticion->Clase= $model->UpdateClase($Modulo, $Alumno, $Estado, $ID, $Libretita);
+        return $Peticion;
+    }
 }

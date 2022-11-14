@@ -433,10 +433,10 @@ const Calificacion = () => {
                 }).then((respuesta) => {
                     if (respuesta.isConfirmed) {
                         $datos = $("#FechaRealizado").val().split('/');
-                        $FechaRealizado = $datos[2] + "/" + $datos[1] + "/" + $datos[0];
+                        $FechaRealizado = $datos[2] + "-" + $datos[1] + "-" + $datos[0];
                         if ($("#FechaEntregado").datepicker("getDate") !== null) {
                             $datos = $("#FechaRealizado").val().split('/');
-                            $FechaEntregado = $datos[2] + "/" + $datos[1] + "/" + $datos[0];
+                            $FechaEntregado = $datos[2] + "-" + $datos[1] + "-" + $datos[0];
                         } else {
                             $FechaEntregado = "1111-01-01";
                         }
@@ -456,7 +456,7 @@ const Calificacion = () => {
                             success(respuesta) {
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'La Calificacion se a Almacenado de forma exitosa',
+                                    title: 'La Instancia se a Almacenado de forma exitosa',
                                     text: '',
                                     confirmButtonText: 'Entendido',
                                     timer: '2000',
@@ -592,10 +592,10 @@ const Calificacion = () => {
                         for (i = 0; i < mod.length; i++) {
                             let FechaEntregado = $('div#' + $(mod[i]).attr('id') + '.Calificaciones1.row input.FechaEntregado').val();
                             $datos = FechaEntregado.split('/');
-                            FechaEntregado = $datos[2] + "/" + $datos[1] + "/" + $datos[0];
+                            FechaEntregado = $datos[2] + "-" + $datos[1] + "-" + $datos[0];
                             let FechaRealizado = $('div#' + $(mod[i]).attr('id') + '.Calificaciones1.row input.FechaRealizado').val();
                             $datos = FechaRealizado.split('/');
-                            FechaRealizado = $datos[2] + "/" + $datos[1] + "/" + $datos[0];
+                            FechaRealizado = $datos[2] + "-" + $datos[1] + "-" + $datos[0];
                             let Funcionario = $('div#' + $(mod[i]).attr('id') + '.Calificaciones1.row input.Funcionario').val();
                             $.ajax({
                                 url: '/Amari/view/Libreta/UpdateInstanciaEscrito.php',
@@ -1241,7 +1241,7 @@ const listaCalificacion = (CI, meses, Libretita, Periodo) => {
                     }
                 });
                 $(".Guardar").on("click", function () {
-                    if ($(this).text() === "Guardar") {
+                    if ($(this).text() === 'Guardar') {
                         for (i = 0; i < mod.length; i++) {
                             if (parseInt($('div#' + $(mod[i]).attr('id') + '.Calificaciones.row input.calif').val()) >= 1 && parseInt($('div#' + $(mod[i]).attr('id') + '.Calificaciones.row input.calif').val()) <= 12 && $('div#' + $(mod[i]).attr('id') + '.Calificaciones.row input.calif').val() !== "") {
                                 $('div#' + $(mod[i]).attr('id') + '.Calificaciones.row input.calif').css('border-color', '#0014A7');
@@ -1298,6 +1298,7 @@ const listaCalificacion = (CI, meses, Libretita, Periodo) => {
                         }
                     } else if ($(this).text() === "Borrar") {
                         for (i = 0; i < mod.length; i++) {
+                            $('div#' + $(mod[i]).attr('id') + '.Calificaciones.row').remove();
                             $.ajax({
                                 url: '/Amari/view/Libreta/DeleteCalificacion.php',
                                 type: 'POST',
@@ -1345,7 +1346,6 @@ const listaCalificacion = (CI, meses, Libretita, Periodo) => {
                 title: 'No se Pudo conectar con el servidor',
                 text: 'Lo sentimos mucho, nos encontramos trabajando en ello',
                 confirmButtonText: 'Entendido',
-                timer: '2000',
                 background: '#f1f1f1',
                 backdrop: 'true',
                 allowOutsideClick: 'false',
