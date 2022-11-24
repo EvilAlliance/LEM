@@ -5,6 +5,10 @@ $(document).ready(function () {
 
 })
 
+$(document).tooltip({
+    track: true
+});
+
 const Control = () => {
     $("#Content").empty();
     llamadaEstudiantes();
@@ -81,10 +85,18 @@ const ApendEstudiante = () => {
             '</div>' +
             '</div>' +
             '<div class="row" value="' + $sel.CI + '">' +
+            '<a class="boton" title="Asistencia">' +
             '<div class="boton green relative" value="1" id="boton"></div>' +
+            '</a>' +
+            '<a class="boton" title="Inasistencia">' +
             '<div class="boton red relative" value="2" id="boton2"></div>' +
+            '</a>' +
+            '<a class="boton" title="Insasistencia Justificada">' +
             '<div class="boton nar relative" value="3" id="boton3"></div>' +
+            '</a>' +
+            '<a class="boton" title="Llegada Tarde">' +
             '<div class="boton yell relative" value="4" id="boton4"></div>' +
+            '</a>' +
             '</div >' +
             '</div >'
         $('#Control').append(Modulo)
@@ -93,16 +105,17 @@ const ApendEstudiante = () => {
 }
 
 const EventoControl = () => {
-    $(".boton").on('click', function () {
+    $("div.boton").on('click', function () {
         if ($(".IE").text().replace("Modulo", "") !== "") {
-            $("div#" + $(this).parent().parent().attr('id') + " .boton").each(function () {
+            $("div#" + $(this).parents('.Alumno1').attr('id') + " .boton").each(function () {
                 if ($(this).hasClass('active') === true) {
                     $(this).toggleClass("active");
                 }
             });
             $(this).toggleClass("active");
             Clases = $(this).attr("class");
-            $("#" + $(this).parent().parent().attr('id') + ".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+            $("#" + $(this).parents('.Alumno1').attr('id') + ".Alumno1").find("div.Modulo").each(function () {
+                $(this).parents("a").attr("title", "Modulo " + $(this).attr("id"));
                 if ($(this).hasClass("yell") === true) {
                     $(this).removeClass("yell");
                 } else if ($(this).hasClass("green") === true) {
@@ -113,6 +126,17 @@ const EventoControl = () => {
                     $(this).removeClass("nar");
                 }
                 $(this).addClass(Clases).removeClass("boton relative active");
+
+                if ($(this).hasClass("yell") === true) {
+                    $(this).parents("a").attr("title", $(this).parents("a").attr("title") + " LLegada Tarde");
+                } else if ($(this).hasClass("green") === true) {
+                    $(this).parents("a").attr("title", $(this).parents("a").attr("title") + " Asistencia");
+                } else if ($(this).hasClass("red") === true) {
+                    $(this).parents("a").attr("title", $(this).parents("a").attr("title") + " Inasistencia");
+                } else if ($(this).hasClass("nar") === true) {
+                    $(this).parents("a").attr("title", $(this).parents("a").attr("title") + " Inasistencia Justificada");
+
+                }
             });
         } else {
             swal.fire({
@@ -194,7 +218,7 @@ const EventoModulo = () => {
                         let Modulo = $("#Modulo").val();
                         $(".IE").html("Modulos")
                         $(".IE").html($(".IE").html() + ": " + Modulo);
-                        $("div#" + $(".boton").parent().parent().attr('id') + " .boton").each(function () {
+                        $("div.boton").each(function () {
                             if ($(this).hasClass('active') === true) {
                                 $(this).toggleClass("active");
                             }
@@ -225,28 +249,32 @@ const EventoModulo = () => {
 const CuadradoModulo = (Modulo) => {
     LEstudiante = JSON.parse(localStorage.getItem("LEstudiante"));
     let contador = 0;
-    if ($("div#" + LEstudiante[0].CI + ".Alumno1").children("div.row.foto").children("div.Modulo") !== null) {
-        $("div#" + LEstudiante[0].CI + ".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+    if ($("div#" + LEstudiante[0].CI + ".Alumno1").find("div.Modulo") !== null) {
+        $("div#" + LEstudiante[0].CI + ".Alumno1").find("div.Modulo").each(function () {
             contador = contador + 1;
         });
     }
     if (contador > Modulo) {
-        $(".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+        $(".Alumno1").find("div.Modulo").each(function () {
             $(this).remove();
         });
         for (let i = 0; i < Modulo; i++) {
             Cuadrado =
-                '<div class="Modulo" id="' + i + '" style="left:' + (2 + (22 * i)) + 'px;"></div>';
+                '<a title="Modulo' + (contador + 1) + '">' +
+                '<div class="Modulo" id="' + i + '" style="left:' + (2 + (22 * i)) + 'px;"></div>' +
+                '</a>';
             $(".Alumno1").each(function () {
-                $(this).children().first().append(Cuadrado);
+                $(this).find("div.foto").append(Cuadrado);
             });
         }
     } else {
         for (contador; contador < Modulo; contador++) {
             Cuadrado =
-                '<div class="Modulo" id="' + (contador - 1) + '" style="left:' + (2 + (22 * contador)) + 'px;"></div>';
+                '<a title="Modulo ' + (contador + 1) + '">' +
+                '<div class="Modulo" id="' + contador + '" style="left:' + (2 + (22 * contador)) + 'px;"></div>' +
+                '</a>';
             $(".Alumno1").each(function () {
-                $(this).children().first().append(Cuadrado);
+                $(this).find("div.foto").append(Cuadrado);
             });
         }
     }
@@ -278,29 +306,39 @@ const CheckFecha = () => {
 }
 
 const SelectorModulo = () => {
-    $(".Alumno1").children("div.row.foto").children("div.Modulo").on('click', function () {
+    $(".Alumno1").find("div.Modulo").on('click', function () {
         $(".boton").unbind();
-        ID = $(this).parent().parent().attr('id');
+        ID = $(this).parents('.Alumno1').attr('id');
         ID1 = $(this).attr('id');
-        $("div#" + $(this).parent().parent().attr('id') + " .boton").on('click', function () {
-            if ($("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").hasClass("yell") === true) {
-                $("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").removeClass("yell");
-            } else if ($("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").hasClass("green") === true) {
-                $("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").removeClass("green");
-            } else if ($("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").hasClass("red") === true) {
-                $("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").removeClass("red");
-            } else if ($("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").hasClass("nar") === true) {
-                $("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").removeClass("nar");
+        $("div#" + $(this).parents(".Alumno1").attr('id') + " div.boton").on('click', function () {
+            $("#" + ID + ".Alumno1").find("div.foto a").attr("title", "Modulo " + $("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").attr("id"));
+            if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("yell") === true) {
+                $("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").removeClass("yell");
+            } else if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("green") === true) {
+                $("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").removeClass("green");
+            } else if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("red") === true) {
+                $("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").removeClass("red")
+            } else if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("nar") === true) {
+                $("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").removeClass("nar");
             }
-            $("div#" + $(this).parent().parent().attr('id') + " .boton").each(function () {
+            $("#" + ID + ".Alumno1").find("div.boton").each(function () {
                 if ($(this).hasClass('active') === true) {
                     $(this).toggleClass("active");
                 }
             });
-            $(this).toggleClass("active");
             Clases = $(this).attr('Class');
-            $("#" + ID + ".Alumno1").children("div.row.foto").children("div#" + ID1 + ".Modulo").addClass(Clases).removeClass("boton relative active");
-            EventoControl();
+            $("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").addClass(Clases).removeClass("boton relative active");
+            if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("yell") === true) {
+                $("#" + ID + ".Alumno1").find("a").attr("title", $("#" + ID + ".Alumno1").find("a").attr("title") + " LLegada Tarde");
+            } else if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("green") === true) {
+                $("#" + ID + ".Alumno1").find("div.foto a").attr("title", $("#" + ID + ".Alumno1").find("div.foto a").attr("title") + " Asistencia");
+            } else if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("red") === true) {
+                $("#" + ID + ".Alumno1").find("div.foto a").attr("title", $("#" + ID + ".Alumno1").find("div.foto a").attr("title") + " Inasistencia");
+            } else if ($("#" + ID + ".Alumno1").find("div#" + ID1 + ".Modulo").hasClass("nar") === true) {
+                $("#" + ID + ".Alumno1").find("div.foto a").attr("title", $("#" + ID + ".Alumno1").find("div.foto a").attr("title") + " Inasistencia Justificada");
+
+            }
+            CuadradoModulo();
         });
     });
 }
@@ -308,7 +346,7 @@ const SelectorModulo = () => {
 const ExisteClase = (date) => {
     $(".IE").html("Modulo");
     $("#Estado").html("Estado");
-    $(".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+    $(".Alumno1").find("div.Modulo").each(function () {
         $(this).remove();
     });
     $(".Alumno1 div.row div.boton").each(function () {
@@ -336,8 +374,9 @@ const ExisteClase = (date) => {
             $("#Estado").html("Estado");
             Clase = JSON.parse(respuesta);
             localStorage.setItem("Clase", JSON.stringify(Clase));
-            $(".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+            $(".Alumno1").find("div.Modulo").each(function () {
                 $(this).remove();
+                $(this).parent().remove();
             });
             if (Clase.Clase.Resultado !== "Vacio") {
                 Clase.Clase.Resultado.forEach($sel => {
@@ -355,8 +394,11 @@ const ExisteClase = (date) => {
                         Atiende = "";
                     }
                     Cuadrado =
-                        '<div class="Modulo ' + Atiende + '" id="' + ($sel.Modulo - 1) + '" style="left:' + (2 + (22 * ($sel.Modulo - 1))) + 'px;"></div>';
+                        '<a title="Modulo' + $sel.Modulo + '">' +
+                        '<div class="Modulo ' + Atiende + '" id="' + $sel.Modulo + '" style="left:' + (2 + (22 * ($sel.Modulo - 1))) + 'px;"></div>' +
+                        '</a>';
                     $("div#" + $sel.CI + ".Alumno1").children("div.row.foto").append(Cuadrado);
+
                     let Module = 0;
                     if (Module < $sel.Modulo) {
                         Module = $sel.Modulo;
@@ -367,14 +409,27 @@ const ExisteClase = (date) => {
                     } else if ($sel.Estado1 === null) {
                         Estado = $sel.Estado;
                     }
-                    $('div.dropdown').children().first().html(Estado + ' <span class="caret" id="' + Estado + '"></span>');
+                    $('div.dropdown').find("button").html(Estado + ' <span class="caret" id="' + Estado + '"></span>');
                     $(".IE").html("Modulos: " + Module);
+                });
+                $("div.Alumno1").find("div.row.foto a").each(function () {
+                    $(this).attr("title", "Modulo " + $(this).find("div.Modulo").attr('id'));
+                    if ($(this).find("div.Modulo").hasClass("yell") === true) {
+                        $(this).attr("title", $(this).attr("title") + " LLegada Tarde");
+                    } else if ($(this).find("div.Modulo").hasClass("green") === true) {
+                        $(this).attr("title", $(this).attr("title") + " Asistencia");
+                    } else if ($(this).find("div.Modulo").hasClass("red") === true) {
+                        $(this).attr("title", $(this).attr("title") + " Inasistencia");
+                    } else if ($(this).find("div.Modulo").hasClass("nar") === true) {
+                        $(this).attr("title", $(this).attr("title") + " Inasistencia Justificada");
+
+                    }
                 });
                 $(".Guardar").on('click', function () {
                     GetClases();
                     $(".IE").html("Modulo");
                     $("#Estado").html("Estado");
-                    $(".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+                    $(".Alumno1").find("div.Modulo").each(function () {
                         $(this).remove();
                     });
                     $(".Alumno1 div.row div.boton").each(function () {
@@ -389,7 +444,7 @@ const ExisteClase = (date) => {
                     InsertClases();
                     $(".IE").html("Modulo");
                     $("#Estado").html("Estado");
-                    $(".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+                    $(".Alumno1").find("div.Modulo").each(function () {
                         $(this).remove();
                     });
                     $(".Alumno1 div.row div.boton").each(function () {
@@ -424,7 +479,7 @@ const InsertClases = () => {
         $(".Alumno1").each(function () {
             let falta = [];
             falta.push($(this).attr('id'))
-            $(this).children().first().children(".Modulo").each(function () {
+            $(this).find("div.Modulo").each(function () {
                 if ($(this).hasClass("yell") === true) {
                     falta.push(2);
                 } else if ($(this).hasClass("green") === true) {
@@ -464,7 +519,7 @@ const GetClases = () => {
         $(".Alumno1").each(function () {
             let falta = [];
             falta.push($(this).attr('id'))
-            $(this).children().first().children(".Modulo").each(function () {
+            $(this).find(".Modulo").each(function () {
                 if ($(this).hasClass("yell") === true) {
                     falta.push(2);
                 } else if ($(this).hasClass("green") === true) {
@@ -561,28 +616,19 @@ const UpdateClase = (Estado, Alumno, Modulo, Fecha, Clase) => {
     $Clase = JSON.parse(localStorage.getItem("Clase"));
     $Libretita = JSON.parse(localStorage.getItem("LibretaSel"));
     let ID = [];
-    console.log($Clase);
     $Clase.Clase.Resultado.forEach($sel => {
         let verificador = 0;
-        console.log(ID);
         ID.forEach($ID => {
-            console.log("foreach");
-            console.log($sel.ID);
-            console.log($ID);
             if ($sel.ID === $ID && verificador === 0 || $sel.ID === $ID && verificador === 1) {
                 verificador = 1;
-                console.log("1");
             } else {
                 verificador = 2;
-                console.log("2");
             }
         });
         if (verificador === 2 || verificador === 0) {
             ID.push($sel.ID);
-            console.log(ID);
         }
     });
-    console.log(ID);
     $.ajax({
         url: '/Amari/view/Libreta/UpdateClase.php',
         type: 'POST',
@@ -611,7 +657,7 @@ const UpdateClase = (Estado, Alumno, Modulo, Fecha, Clase) => {
             });
             $(".IE").html("Modulo");
             $("#Estado").html("Estado");
-            $(".Alumno1").children("div.row.foto").children("div.Modulo").each(function () {
+            $(".Alumno1").find("div.Modulo").each(function () {
                 $(this).remove();
             });
             $("div#" + $(this).parent().parent().attr('id') + " .boton").each(function () {

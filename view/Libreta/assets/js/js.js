@@ -4,10 +4,13 @@ $(window).on('load', function () {
     $("#Grupo div.submodule").hide();
     $("#Clase div.submodule").hide();
 });
+
+$(document).tooltip({
+    track: true
+});
+
 $(document).ready(function () {
-    $(".tooltip1").tooltip({
-        track: true
-    });
+
 })
 
 window.addEventListener("visibilitychange", () => {
@@ -19,7 +22,7 @@ window.addEventListener("visibilitychange", () => {
 });
 
 const Libretas = () => {
-    $(".distancia").addClass("inactive");
+    $(".tooltip1").addClass("inactive");
     $("#Libretas").removeClass("inactive");
     $("#Content").empty();
     $("#Libretas a div img").attr('src', $("#Libretas a div img").attr('src').replace('folder.png', 'folder (1).png'));
@@ -67,7 +70,7 @@ const Libretas = () => {
             });
             $(".seleccionar").on('click', function () {
                 localStorage.setItem("LibretaSel", JSON.stringify($Libreta1[$(this).attr('id')]));
-                $(".distancia").toggleClass("inactive");
+                $(".tooltip1").toggleClass("inactive");
                 $("#Libretas").toggleClass("inactive");
                 Estudiante();
             });
@@ -230,12 +233,14 @@ const Navbar = (id) => {
             id: "Planificacion"
         }
     ];
-    if (!($("#" + id).hasClass("inactive"))) {
+    if ($("#" + id).hasClass("inactive") === false) {
         $("#Content").removeClass('overhidden');
         IDs.forEach(function (sel) {
-            $("#" + sel.id + " a div img").attr('src', $("#" + sel.id + " a div img").attr('src').replace(sel.lleno, sel.vacio));
+            if ($("#" + sel.id + " a div img").attr('src') === '/Amari/view/Libreta/assets/img/'+sel.lleno) {
+                $("#" + sel.id + " a div img").attr('src', $("#" + sel.id + " a div img").attr('src').replace(sel.lleno,sel.vacio));
+            }
             if (sel.id === id) {
-                $("#" + id + " a div img").attr('src', $("#" + id + " a div img").attr('src').replace(sel.vacio, sel.lleno));
+                $("#" + id + " a div img").attr('src',$("#" + id + " a div img").attr('src').replace(sel.vacio, sel.lleno));
             }
         });
         if (id === "Grupo" || id === "Clase") {

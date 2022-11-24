@@ -289,7 +289,7 @@ class modelLibreta
     public function GetCalificacion($Libretita, $CI)
     {
         $Devolver = new stdClass();
-        $query = "SELECT Consiguio.ID, Calificacion.Tipo, Calificacion.Descripcion, Calificacion.Fecha, Consiguio.Nota FROM Pertenece JOIN Consiguio ON Pertenece.ID = Consiguio.ID JOIN Calificacion on Calificacion.ID = Consiguio.ID WHERE Nombre='" . $Libretita["Asignatura"] . "' AND Orientacion='" . $Libretita["Orientacion"] . "' AND Curso='" . $Libretita["Curso"] . "' AND Grado='" . $Libretita["Grado"] . "' AND Grupo='" . $Libretita["Grupo"] . "' AND Turno='" . $Libretita["Turno"] . "' AND Ano=" . $Libretita["Año"] . " AND Consiguio.CI = $CI AND Consiguio.ID NOT IN (SELECT ID FROM Promedio) and Consiguio.ID NOT IN (SELECT ID FROM Trabajos_Escritos);";
+        $query = "SELECT Consiguio.ID, Calificacion.Tipo, Calificacion.Descripcion, Calificacion.Fecha, Consiguio.Nota FROM Pertenece JOIN Consiguio ON Pertenece.ID = Consiguio.ID JOIN Calificacion on Calificacion.ID = Consiguio.ID WHERE Nombre='" . $Libretita["Asignatura"] . "' AND Orientacion='" . $Libretita["Orientacion"] . "' AND Curso='" . $Libretita["Curso"] . "' AND Grado='" . $Libretita["Grado"] . "' AND Grupo='" . $Libretita["Grupo"] . "' AND Turno='" . $Libretita["Turno"] . "' AND Ano=" . $Libretita["Año"] . " AND Consiguio.CI = $CI AND Consiguio.ID NOT IN (SELECT ID FROM Promedio) and Consiguio.ID NOT IN (SELECT ID FROM Trabajos_Escritos) ORDER BY Calificacion.Fecha DESC;";
         if ($this->conexion !== "Error") {
             $peticion = @mysqli_query($this->conexion, $query);
             if (!$peticion) {

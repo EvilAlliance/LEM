@@ -34,84 +34,84 @@ if (!(isset($_SESSION['CI']) && isset($_SESSION['Rol']) && isset($_SESSION['pass
     ?>
     <div class="row dentro position-ralative">
         <div class="col-2 col-md-1 dentro navbar scroll-box centrar1">
-            <div class="row widthcien distancia tooltip1" id="Libretas" onclick="Navbar('Libretas')">
-                <a class="centrar1" href="#" title="Listado de Libretas">
+            <div class="row widthcien  tooltip1" id="Libretas" onclick="Navbar('Libretas')">
+                <a href="#" title="Listado de Libretas">
                     <div class="col-12 centrar1 module">
                         <img class="img-fluid" src="/Amari/view/Libreta/assets/img/folder.png">
                     </div>
                 </a>
             </div>
-            <div id="Estudiante" class="row widthcien distancia tooltip1" onclick="Navbar('Estudiante')">
-                <a class="centrar1" href="#" title="Listado de Estudiante">
+            <div id="Estudiante" class="row widthcien  tooltip1" onclick="Navbar('Estudiante')">
+                <a href="#" title="Listado de Estudiante">
                     <div class="col-12 centrar1 module">
                         <img class="img-fluid" src="/Amari/view/Libreta/assets/img/customer.png">
                     </div>
                 </a>
             </div>
-            <div id="Asistencia" class="row widthcien distancia tooltip1" onclick="Navbar('Asistencia')">
-                <a class="centrar1" href="#" title="Contol de Asistencia">
+            <div id="Asistencia" class="row widthcien  tooltip1" onclick="Navbar('Asistencia')">
+                <a href="#" title="Contol de Asistencia">
                     <div class="col-12 centrar1 module">
                         <img class="img-fluid" src="/Amari/view/Libreta/assets/img/clipboard.png">
                     </div>
                 </a>
             </div>
-            <div id="Calificacion" class="row widthcien distancia tooltip1" onclick="Navbar('Calificacion')">
-                <a class="centrar1" href="#" title="Calificacion">
+            <div id="Calificacion" class="row widthcien  tooltip1" onclick="Navbar('Calificacion')">
+                <a href="#" title="Calificacion">
                     <div class="col-12 centrar1 module">
                         <img class="img-fluid" src="/Amari/view/Libreta/assets/img/grade.png">
                     </div>
                 </a>
             </div>
-            <div id="Clase" class="row widthcien distancia tooltip1" onclick="Navbar('Clase')">
-                <a class="centrar1" href="#" title="Clase">
+            <div id="Clase" class="row widthcien  tooltip1" onclick="Navbar('Clase')">
+                <a href="#" title="Clase">
                     <div class="col-12 centrar1 module">
                         <img class="img-fluid" src="/Amari/view/Libreta/assets/img/notas.png">
                     </div>
                 </a>
-                <div id="Desarrollo" class="widthcien distancia tooltip1" onclick="Navbar('Desarrollo')">
-                    <a class="centrar1" href="#" title="Desarrollo del Curso">
+                <div id="Desarrollo" class="widthcien  tooltip1" onclick="Navbar('Desarrollo')">
+                    <a href="#" title="Desarrollo del Curso">
                         <div class="col-12 centrar1 submodule">
                             <img class="img-fluid" src="/Amari/view/Libreta/assets/img/left-align.png">
                         </div>
                     </a>
                 </div>
-                <div id="Coordinacion" class="widthcien distancia tooltip1" onclick="Navbar('Coordinacion')">
-                    <a class="centrar1" href="#" title="Coordinación">
+                <div id="Coordinacion" class="widthcien  tooltip1" onclick="Navbar('Coordinacion')">
+                    <a href="#" title="Coordinación">
                         <div class="col-12 centrar1 submodule">
                             <img class="img-fluid" src="/Amari/view/Libreta/assets/img/team.png">
                         </div>
                     </a>
                 </div>
             </div>
-            <div id="Grupo" class="row  widthcien distancia tooltip1 centar1" onclick="Navbar('Grupo')">
-                <a class="centrar1" href="#" title="Grupo">
+            <div id="Grupo" class="row  widthcien  tooltip1 centar1" onclick="Navbar('Grupo')">
+                <a href="#" title="Grupo">
                     <div class="col-12 centrar1 module">
                         <img class="img-fluid" src="/Amari/view/Libreta/assets/img/people.png">
                     </div>
                 </a>
-                <div id="Diagnostico" class="widthcien distancia tooltip1" onclick="Navbar('Diagnostico')">
-                    <a class="centrar1" href="#" title="Diagnostico del Grupo">
+                <div id="Diagnostico" class="widthcien  tooltip1" onclick="Navbar('Diagnostico')">
+                    <a href="#" title="Diagnostico del Grupo">
                         <div class="col-12 centrar1 submodule">
                             <img class="img-fluid" src="/Amari/view/Libreta/assets/img/planificacion.png">
                         </div>
                     </a>
                 </div>
-                <div id="Reunion" class="widthcien distancia tooltip1" onclick="Navbar('Reunion')">
-                    <a class="centrar1" href="#" title="Reunion">
+                <div id="Reunion" class="widthcien  tooltip1" onclick="Navbar('Reunion')">
+                    <a href="#" title="Reunion">
                         <div class="col-12 centrar1 submodule">
                             <img class="img-fluid" src="/Amari/view/Libreta/assets/img/meeting.png">
                         </div>
                     </a>
                 </div>
-                <div id="Observacion" class="widthcien distancia tooltip1" onclick="Navbar('Observacion')">
-                    <a class="centrar1" href="#" title="Observaciones">
+                <div id="Observacion" class="widthcien  tooltip1" onclick="Navbar('Observacion')">
+                    <a href="#" title="Observaciones">
                         <div class="col-12 submodule centrar1">
                             <img class="img-fluid" src="/Amari/view/Libreta/assets/img/observation.png">
                         </div>
                     </a>
                 </div>
                 <div id="Planificacion" class=" widthcien  centrar1 tooltip1" onclick="Navbar('Planificacion')">
-                    <a class="centrar1" href="#" title="Planificacion">
+                    <a href="#" title="Planificacion">
                         <div class="col-12 submodule centrar1">
                             <img class="img-fluid" src="/Amari/view/Libreta/assets/img/planning.png">
                         </div>

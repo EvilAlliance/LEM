@@ -128,6 +128,7 @@ body {
     top: 0;
     left: 0;
     padding: 0px;
+    max-width: 120px;
 }
 
 .navbar :is(div.row) :is(div.module) :is(img) {
@@ -135,14 +136,14 @@ body {
 }
 
 .module {
-    border-radius: 10px;
     background-color: #e0dfdf;
-    min-height: 80px;
-    max-width: 80px;
+    min-width: 80px;
     cursor: pointer;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
+    aspect-ratio: 1;
+    margin: 10%;
 }
 
 .module:hover {
@@ -150,7 +151,6 @@ body {
 }
 
 .submodule {
-    border-radius: 10px;
     background-color: #e0dfdf;
     min-height: 55px;
     max-width: 55px;
@@ -158,6 +158,8 @@ body {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
+    aspect-ratio: 1;
+    margin: 10px;
 }
 
 .navbar :is(div.row) :is(div.submodule) :is(img) {
@@ -832,7 +834,6 @@ label {
 }
 
 .boton {
-    opacity: 0.45;
     cursor: pointer;
     transition: all 150ms linear;
     line-height: 1.3;
@@ -840,6 +841,10 @@ label {
     min-width: 75.5px;
     max-width: 63px;
     min-height: 52px;
+}
+
+div.boton{
+    opacity: 0.55;
 }
 
 .boton.active {
@@ -911,6 +916,6 @@ label {
     cursor: pointer;
 }
 
-.ui-widget.ui-widget-content {
-    z-index: 2;
+a.boton {
+    padding: 0px !important;
 }
